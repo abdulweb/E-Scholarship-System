@@ -1,28 +1,4 @@
-
-<!doctype html>
-<html lang="en-US">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<title>Smarty Admin</title>
-		<meta name="description" content="" />
-		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
-
-		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
-
-		<!-- WEB FONTS -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
-
-		<!-- CORE CSS -->
-		<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		
-		<!-- THEME CSS -->
-		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
-
-	</head>
+<?php include('includes/headlink.php'); ?>
 	<!--
 		.boxed = boxed version
 	-->
@@ -34,8 +10,8 @@
 			<div class="login-box">
 
 				<!-- login form -->
-				<form action="index.html" method="post" class="sky-form boxed">
-					<header><i class="fa fa-users"></i> Sign In</header>
+				<form action="" method="post" class="sky-form boxed">
+					<header><i class="fa fa-lock"></i> Sign In</header>
 
 					<!--
 					<div class="alert alert-danger noborder text-center weight-400 nomargin noradius">
@@ -78,8 +54,8 @@
 					<footer>
 						<button type="submit" class="btn btn-primary pull-right">Sign In</button>
 						<div class="forgot-password pull-left">
-							<a href="page-password.html">Forgot password?</a> <br />
-							<a href="page-register.html"><b>Need to Register?</b></a>
+							<a href="">Forgot password?</a> <br />
+							<a href="register.php"><b>Need to Register?</b></a>
 						</div>
 					</footer>
 				</form>
@@ -87,23 +63,12 @@
 
 				<hr />
 
-				<div class="text-center">
-					Or sign in using:
-				</div>
-
-
-				<div class="socials margin-top-10 text-center"><!-- more buttons: ui-buttons.html -->
-					<a href="#" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-					<a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-				</div>
-
 			</div>
+            <?php include('includes/footer.php') ?>
 
-		</div>
+		</div> 
 
 		<!-- JAVASCRIPT FILES -->
-		<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
-		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.2.3.min.js"></script>
-		<script type="text/javascript" src="assets/js/app.js"></script>
+		<?php include('includes/js.php');?>
 	</body>
 </html>
