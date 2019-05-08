@@ -1,4 +1,10 @@
-<?php include('includes/headlink.php'); ?>
+
+<?php
+	include('includes/dbh.php');
+	include ('includes/user.php'); 
+	unset($_SESSION['user']);
+	include('includes/headlink.php');
+ ?>
 	<!--
 		.boxed = boxed version
 	-->
