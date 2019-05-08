@@ -1,7 +1,7 @@
 
 <?php
 	include('includes/dbh.php');
-	include ('includes/user.php'); 
+	include('includes/user.php');
 	unset($_SESSION['user']);
 	include('includes/headlink.php');
  ?>
@@ -18,6 +18,16 @@
 				<!-- login form -->
 				<form action="" method="post" class="sky-form boxed">
 					<header><i class="fa fa-lock"></i> Sign In</header>
+
+					<?php
+						if(isset($_POST['login_btn']))
+						{
+							$username = $_POST['email'];
+							$password = $_POST['password'];
+							$object = new user();
+						   $object->login($username,$password);
+						}
+					?>
 
 					<!--
 					<div class="alert alert-danger noborder text-center weight-400 nomargin noradius">
@@ -40,7 +50,7 @@
 							<label class="label">E-mail</label>
 							<label class="input">
 								<i class="icon-append fa fa-envelope"></i>
-								<input type="email">
+								<input type="email" name="email" required>
 								<span class="tooltip tooltip-top-right">Email Address</span>
 							</label>
 						</section>
@@ -49,7 +59,7 @@
 							<label class="label">Password</label>
 							<label class="input">
 								<i class="icon-append fa fa-lock"></i>
-								<input type="password">
+								<input type="password" name="password" required>
 								<b class="tooltip tooltip-top-right">Type your Password</b>
 							</label>
 							<label class="checkbox"><input type="checkbox" name="checkbox-inline" checked><i></i>Keep me logged in</label>
@@ -58,7 +68,7 @@
 					</fieldset>
 
 					<footer>
-						<button type="submit" class="btn btn-primary pull-right">Sign In</button>
+						<button type="submit" class="btn btn-primary pull-right" name="login_btn">Sign In</button>
 						<div class="forgot-password pull-left">
 							<a href="">Forgot password?</a> <br />
 							<a href="register.php"><b>Need to Register?</b></a>
