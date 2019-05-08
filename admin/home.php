@@ -26,7 +26,7 @@
 						<div class="panel-heading">
 
 							<span class="title elipsis">
-								<strong>Yeah Histroy</strong> <!-- panel title -->
+								<strong><?=date('Y'); ?> Summary</strong> <!-- panel title -->
 							</span>
 
 							<!-- right options -->
