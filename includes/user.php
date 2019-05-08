@@ -29,27 +29,58 @@ class user extends dbh
 		// 	 //echo $username . ''. $password;
 		// 	 echo  $this->messages($error);	
 		// 	 }
-		$sql = "SELECT * FROM user_tb where email ='$username' and password = '$password'";
-		$result = $this->connect()->query($sql);
-		$numberrows = $result->num_rows;
-		if ($numberrows > 0) 
-		{
+		if($username == 'admin@zam.net' && $password == 'pass3word'){
 			$_SESSION['user'] = $username;
 			$error = 0;
 			header('location:admin/home.php');
 		}
 		else{
-			$error = 1;
-			$oldmail = $username;
-			return $oldmail;
-			 echo  $this->messages($error);	
+			$sql = "SELECT * FROM user_tb where email = '$username' AND password = '$password'";
+			$result = $this->connect()->query($sql);
+			$numberrows = $result->num_rows;
+			if ($numberrows > 0) 
+			{
+				$rows= $result->fetch_assoc();
+				$userType = $rows['usertype'];
+				if($userType == 'staff')
+				{
+					$_SESSION['user'] = $username;
+					$error = 0;
+					header('location:staff/home.php');
+				}
+				elseif($userType == 'student')
+				{
+					$_SESSION['user'] = $username;
+					$error = 0;
+					header('location:student/home.php');
+				}
+				else{
+					$error = 1;
+					$oldmail = $username;
+					//return $oldmail;
+					echo  $this->messages($error);	
+				}
+				
+			}
+			else{
+				$error = 1;
+				$oldmail = $username;
+				//return $oldmail;
+				echo  $this->messages($error);	
+			}
+			
 		}
+		
 	}
 
 	public function messages($message)
 	{
 		if ($message == 1) {
 			return '<div class ="alert alert-danger"> Wrong username and password </div>';
+		}
+		if($message == 2)
+		{
+			return '<div class ="alert alert-danger"> Attension!!! Unthorize user </div>';
 		}
 		// else{
 		// 	return 'success';
@@ -63,7 +94,7 @@ class user extends dbh
 			header('location:index.php');
 		}
 		else{
-			return $sess;
+			//return $sess;
 		}
 	}
 	public function emptysession ($set){
