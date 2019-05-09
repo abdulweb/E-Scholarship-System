@@ -21,5 +21,7 @@
 		<link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/color_scheme/blue.css" rel="stylesheet" type="text/css" id="color_scheme" />
+		<!-- Custom css -->
+		<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
 
 	</head>

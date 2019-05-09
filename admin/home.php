@@ -1,5 +1,11 @@
+<?php include '..\includes/dbh.php'; ?>
+<?php include '..\includes/user.php'; 
+    $object->sessioncheck($_SESSION['user']);
+   ?>
+<?php 
 
-<?php include('includes/headlink.php'); ?>
+	include('includes/headlink.php');
+ ?>
 	<!--
 		.boxed = boxed version
 	-->
@@ -45,17 +51,17 @@
 							<div class="row text-center">
 
 								<div class="col-md-4">
-									<h4>Disable display input</h4>
-									<input class="knob" data-width="100" data-displayinput="false" value="35">
+									<h4>No of Applicant</h4>
+									<input class="knob"  value="44">
 								</div>
 
 								<div class="col-md-4">
-									<h4>Cursor Mode</h4>
-									<input class="knob" data-width="150" data-cursor="true" data-fgcolor="#222222" data-thickness=".3" value="29">
+									<h4>No of Admin Staff</h4>
+									<input class="knob"  value="44">
 								</div>
 
 								<div class="col-md-4">
-									<h4>Display previous value</h4>
+									<h4>No of</h4>
 									<input class="knob"  value="44">
 								</div>
 

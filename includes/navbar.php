@@ -41,7 +41,7 @@
 
 
 						<li><!-- dashboard -->
-							<a class="dashboard" href="..\index.php">
+							<a class="dashboard" href="logout.php">
 								<i class="main-icon fa fa-dashboard"></i> <span>Logout</span>
 							</a>
 						</li>

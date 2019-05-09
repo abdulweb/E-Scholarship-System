@@ -10,7 +10,7 @@ class dbh
 	private $dbname;
 	public function connect(){
 		$this->servername ='localhost';
-		$this->username ='abdulweb';
+		$this->username ='root';
 		$this->password ='root';
 		$this->dbname ='zamScholarship';
 

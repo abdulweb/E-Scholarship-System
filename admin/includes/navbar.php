@@ -23,7 +23,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="manageAdmin.php">
 								<i class="fa fa-menu-arrow pull-right"></i>
 								<i class="main-icon fa fa-gear"></i> <span>Manage Admin Staff</span>
 							</a>

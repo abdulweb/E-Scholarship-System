@@ -14,27 +14,16 @@ class user extends dbh
 	// }
 
 
-	public function login($username, $password){
-		// $stmt = $this->connect()->prepare("SELECT * FROM users WHERE username ='$username' AND password ='$password'");
-		// $stmt->execute();
-		// $numberrows = $stmt->num_rows;
-		// if ($numberrows > 0) {
-		// 	$_SESSION['user'] = $username;
-		// 	$error = 0;
-		// 	header('location:home.php');
-			
-		// }
-		// else{
-		// 	 $error = 1;
-		// 	 //echo $username . ''. $password;
-		// 	 echo  $this->messages($error);	
-		// 	 }
-		if($username == 'admin@zam.net' && $password == 'pass3word'){
+	public function login($username, $password)
+	{
+		if($username == 'admin@zam.net' && $password == 'pass3word')
+		{
 			$_SESSION['user'] = $username;
 			$error = 0;
 			header('location:admin/home.php');
 		}
-		else{
+		else
+		{
 			$sql = "SELECT * FROM user_tb where email = '$username' AND password = '$password'";
 			$result = $this->connect()->query($sql);
 			$numberrows = $result->num_rows;
@@ -91,7 +80,7 @@ class user extends dbh
 	{
 		if ($sess =='' or empty($sess) or $sess == null) 
 		{
-			header('location:index.php');
+			header('location:..\index.php');
 		}
 		else{
 			//return $sess;
@@ -102,32 +91,38 @@ class user extends dbh
 		header('location:..\index.php');
 	}
 
-	public function insertclass($name, $datet)
+	public function insertAdminStaff($email, $phone)
 	{
-		if (empty($this->checkclass($name))) 
+		if (empty($this->checkAdminStaff($email))) 
 		{
-			$insert = "INSERT INTO classes(class_name, date_create) Values('$name','$datet')";
+			$date = date('Y-m-d');
+			$insert = "INSERT INTO user_tb(email, password, usertype,date_create) Values('$email','$phone','admin','$date')";
 			$stmt = $this->connect()->query($insert);
 			if (!$stmt) {
 				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
 			}
 			else
 			{
-				echo '<div class ="alert alert-success"> <strong> New Class Added  </strong> </div>';
+				echo '<div class ="alert alert-success"> 
+					<strong> New Admin Staff Added 
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					</strong> </div>';
 			}
 
 		}
 		else{
-			echo $this->checkclass($name);
+			echo $this->checkAdminStaff($email);
 		}
 		
 	}
 
-	public function checkclass($name){
-		$stmt = "SELECT * FROM classes where class_name = '$name'";
+	public function checkAdminStaff($email){
+		$stmt = "SELECT * FROM user_tb where email = '$email'";
 		$result = $this->connect()->query($stmt); 
 		if (($result->num_rows)> 0) {
-			return '<div class ="alert alert-danger"> <strong> Sorry !!! Class Name Already Exist </strong> </div>';
+			return '<div class ="alert alert-danger"> <strong> Sorry !!! Admin Staff Already Exist 
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			</strong> </div>';
 			 
 		}
 		else{
@@ -135,8 +130,8 @@ class user extends dbh
 		}
 	}
 
-	public function getclassroom(){
-		$stmt = "SELECT * FROM classes ORDER BY class_name ASC";
+	public function getAdminStaff(){
+		$stmt = "SELECT * FROM user_tb where usertype ='admin' ORDER BY id DESC";
 		$result = $this->connect()->query($stmt);
 		$numberrows = $result->num_rows;
 		if ($numberrows >0) {
@@ -144,10 +139,13 @@ class user extends dbh
 			while ($rows= $result->fetch_assoc()) {
 				echo '<tr>
                     <td>'.$counter.'</td>
-                    <td>'.$rows['class_name'].'</td>
-                    <td>'.$this->getstudentNumber($rows['id']).'</td>
+                    <td>'.$rows['email'].'</td>
+                    <td>'.$rows['password'].'</td>
                     <td>'.$rows['date_create'].'</td>
-                    <td><button class="btn btn-primary btn-sm">View</button></td>
+                    <td>
+                    <a href="" class="btn btn-info btn-sm">View</a>
+                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
                 </tr>';
                 $counter++;
 			}
