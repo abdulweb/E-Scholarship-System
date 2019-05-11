@@ -209,6 +209,47 @@ class user extends dbh
 		}
 	}
 
+	public function insertLga($name)
+	{
+		if (empty($this->checkLga($name))) 
+		{
+			$date = date('Y-m-d');
+            
+			$insert = "INSERT INTO lga(name,date_create) Values('$name','$date')";
+			$stmt = $this->connect()->query($insert);
+			if (!$stmt) {
+				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
+			}
+			else
+			{
+				echo '<div class ="alert alert-success"> 
+					<strong> New Lga Added Successfully
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					</strong> </div>';
+			}
+
+
+		}
+		else{
+			echo $this->checkLga($name);
+		}
+		
+	}
+
+	public function checkLga($name){
+		$stmt = "SELECT * FROM lga where name = '$name'";
+		$result = $this->connect()->query($stmt); 
+		if (($result->num_rows)> 0) {
+			return '<div class ="alert alert-danger"> <strong> Sorry !!! Lga Already Exist 
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			</strong> </div>';
+			 
+		}
+		else{
+
+		}
+	}
+
 
 
 

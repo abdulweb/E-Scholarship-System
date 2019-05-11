@@ -46,12 +46,11 @@
 						<div class="row">
 							<div class="col-md-12">
 								<?php
-									// if (isset($_POST['addStaffBtn'])) {
-									// 	$email = $_POST['staffEmail'];
-									// 	$phoneNo = $_POST['phoneNo'];
-									// 	$object->insertAdminStaff($email,$phoneNo);
-									// 	echo $_SESSION['message'];
-									// }
+									if (isset($_POST['addLgaBtn'])) {
+										$lgaName = strtoupper($_POST['lgaName']);
+										$object->insertLga($lgaName);
+										//echo $_SESSION['message'];
+									}
 								?>
 							</div>
 							<div class="col-md-9">
@@ -124,7 +123,7 @@
 										<!-- Modal Footer -->
 											<div class="modal-footer">
 												<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"> </i> Close</button>
-												<button type="submit" name="addStaffBtn" class="btn btn-success"><i class="fa fa-home"> </i> Add</button>
+												<button type="submit" name="addLgaBtn" class="btn btn-success"><i class="fa fa-home"> </i> Add</button>
 											</div>
 										</form>
 

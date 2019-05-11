@@ -54,7 +54,7 @@
 
 
 						<li><!-- dashboard -->
-							<a class="dashboard" href=""><!-- warning - url used by default by ajax (if eneabled) -->
+							<a class="dashboard" href="home.php"><!-- warning - url used by default by ajax (if eneabled) -->
 								<i class="main-icon fa fa-dashboard"></i> <span>Dashboard</span>
 							</a>
 						</li>
