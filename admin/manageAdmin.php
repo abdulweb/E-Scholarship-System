@@ -1,6 +1,7 @@
 <?php include '..\includes/dbh.php'; ?>
 <?php include '..\includes/user.php'; 
     $object->sessioncheck($_SESSION['user']);
+    $_SESSION['message'] ='';
    ?>
 <?php 
 
@@ -50,6 +51,7 @@
 										$email = $_POST['staffEmail'];
 										$phoneNo = $_POST['phoneNo'];
 										$object->insertAdminStaff($email,$phoneNo);
+										echo $_SESSION['message'];
 									}
 								?>
 							</div>
@@ -152,7 +154,8 @@
 
 	
 		<!-- JAVASCRIPT FILES -->
-		<?php include('includes/js.php'); ?>
+		<?php include('includes/js.php');
+		unset($_SESSION['message']); ?>
 
 	</body>
 </html>

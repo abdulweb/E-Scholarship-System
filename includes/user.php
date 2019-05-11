@@ -1,5 +1,7 @@
 <?php
 session_start();
+include("../phpmailer-master/class.phpmailer.php");
+ include("../phpmailer-master/class.smtp.php");
 /**
 * 
 */
@@ -99,19 +101,52 @@ class user extends dbh
 		if (empty($this->checkAdminStaff($email))) 
 		{
 			$date = date('Y-m-d');
-			$hash_phone = md5($phone)
-			$insert = "INSERT INTO user_tb(email, password, usertype,date_create) Values('$email','$hash_phone','staff','$date')";
-			$stmt = $this->connect()->query($insert);
-			if (!$stmt) {
-				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
-			}
-			else
-			{
-				echo '<div class ="alert alert-success"> 
-					<strong> New Admin Staff Added 
-					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					</strong> </div>';
-			}
+			$hash_phone = substr(md5($phone), 0,8) ;
+			$Subject = 'Zamfara Schorlaship Board';
+			$Mssg = 'Your Login Detail is as follows  username : ' . $email . ' Password : ' . $hash_phone;
+			$mail = new PHPMailer();
+
+            $mail->IsSMTP();
+            $mail->SMTPAuth   = true;                  // enable SMTP authentication
+            $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
+            $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+            $mail->Port       = 465; //or 587
+
+            $mail->Username   = "binraheem01@gmail.com";  // GMAIL username
+            $mail->Password   = "babatunde";            // GMAIL password
+            $mail ->SetFrom('Zamfara Schorlaship Board');
+
+            $mail->From     = $email;
+            $mail->FromName   = "no-reply";
+            $mail->Subject    = $Subject;
+            $mail->Body    = $Mssg; //Text Body
+            $mail->WordWrap   = 50; // set word wrap
+            $mail ->AddAddress($email);
+            // $mail->AddAttachment('images/'.$Uname.'.pdf');
+            if(!$mail->Send())
+            {
+               echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Message not Send. Please connect to internet </strong> </div>';
+               echo "Mailer Error: " . $mail->ErrorInfo;
+               exit;
+            }
+            else
+            {
+
+				$insert = "INSERT INTO user_tb(email, password, phone, usertype,date_create) Values('$email','$hash_phone','$phone','staff','$date')";
+				$stmt = $this->connect()->query($insert);
+				if (!$stmt) {
+					echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
+				}
+				else
+				{
+					echo '<div class ="alert alert-success"> 
+						<strong> New Admin Staff Added 
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						</strong> </div>';
+				}
+
+            }
+
 
 		}
 		else{
@@ -135,7 +170,7 @@ class user extends dbh
 	}
 
 	public function getAdminStaff(){
-		$stmt = "SELECT * FROM user_tb where usertype ='admin' ORDER BY id DESC";
+		$stmt = "SELECT * FROM user_tb where usertype ='staff'";
 		$result = $this->connect()->query($stmt);
 		$numberrows = $result->num_rows;
 		if ($numberrows >0) {
@@ -144,16 +179,32 @@ class user extends dbh
 				echo '<tr>
                     <td>'.$counter.'</td>
                     <td>'.$rows['email'].'</td>
-                    <td>'.$rows['password'].'</td>
+                    <td>'.$rows['phone'].'</td>
                     <td>'.$rows['date_create'].'</td>
                     <td>
                     <a href="" class="btn btn-info btn-sm">View</a>
-                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="delete.php?id='.htmlentities($rows['id']).'" class="btn btn-danger btn-sm" onclick="return confirm(\'sure to delete !\');" >Delete</a>
                     </td>
                 </tr>';
                 $counter++;
 			}
 			
+		}
+	}
+
+	public function delete($id){
+		$stmt = "DELETE FROM user_tb WHERE id = '$id'";
+		$result = $this->connect()->query($stmt);
+		if (!$result) {
+			$_SESSION['message'] = '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
+			header('location:manageAdmin.php');
+		}
+		else{
+			$_SESSION['message'] = '<div class ="alert alert-success"> 
+						<strong> Staff Record Deleted
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						</strong> </div>';
+			header('location:manageAdmin.php');
 		}
 	}
 

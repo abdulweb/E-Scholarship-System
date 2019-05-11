@@ -20,12 +20,12 @@
 					<?php if ($_SESSION['usertype'] == 'superAdmin') {
 					 ?>
 						<li><!-- dashboard -->
-							<a class="dashboard" href=""><!-- warning - url used by default by ajax (if eneabled) -->
+							<a class="dashboard" href="home.php"><!-- warning - url used by default by ajax (if eneabled) -->
 								<i class="main-icon fa fa-dashboard"></i> <span>Dashboard</span>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="manageAdmin.php">
 								<i class="fa fa-menu-arrow pull-right"></i>
 								<i class="main-icon fa fa-bar-chart-o"></i> <span>Manage Admin Staf</span>
 							</a>
