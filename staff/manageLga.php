@@ -93,6 +93,47 @@
 					</div>
 					<!-- /PANEL -->
 
+					<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+
+										<!-- Modal Header -->
+										<div class="modal-header bg-primary">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">LGA Registration</h4>
+										</div>
+
+										<!-- Modal Body -->
+										<div class="modal-body">
+											<form action="" method="post" class="sky-form boxed">
+												<fieldset>	
+												
+													<section>
+														<label class="label">Local Gov't Name</label>
+														<label class="input">
+															<i class="icon-append fa fa-home"></i>
+															<input type="text" name="lgaName" required>
+															<span class="tooltip tooltip-top-right">LGA Name</span>
+														</label>
+													</section>
+
+												</fieldset>
+											
+										</div>
+
+										<!-- Modal Footer -->
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban"> </i> Close</button>
+												<button type="submit" name="addStaffBtn" class="btn btn-success"><i class="fa fa-home"> </i> Add</button>
+											</div>
+										</form>
+
+									</div>
+								</div>
+					</div>
+							<!-- sample modal content -->
+
+
 				</div>
 			</section>
 			<!-- /MIDDLE -->
