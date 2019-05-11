@@ -4,7 +4,7 @@
    ?>
 <?php 
 
-	include('includes/headlink.php');
+	include('..\admin/includes/headlink.php');
  ?>
 	<!--
 		.boxed = boxed version
@@ -16,9 +16,9 @@
 		<div id="wrapper">
 
 		
-            <?php include('includes/navbar.php'); ?>
+            <?php include('..\admin/includes/navbar.php'); ?>
 
-			<?php include('includes/header.php');?>
+			<?php include('..\admin/includes/header.php');?>
 
 
 			<!-- MIDDLE -->
@@ -50,20 +50,20 @@
 
 							<div class="row text-center">
 
-								<div class="col-md-4">
+								<!-- <div class="col-md-4">
 									<h4>No of Applicant</h4>
 									<input class="knob"  value="44">
 								</div>
 
 								<div class="col-md-4">
-									<h4>No of Question</h4>
+									<h4>No of Admin Staff</h4>
 									<input class="knob"  value="44">
 								</div>
 
 								<div class="col-md-4">
-									<h4>No of Local Government</h4>
+									<h4>No of</h4>
 									<input class="knob"  value="44">
-								</div>
+								</div> -->
 
 							</div>
 
@@ -93,7 +93,7 @@
 
 	
 		<!-- JAVASCRIPT FILES -->
-		<?php include('includes/js.php'); ?>
+		<?php include('..\admin/includes/js.php'); ?>
 
 	</body>
 </html>

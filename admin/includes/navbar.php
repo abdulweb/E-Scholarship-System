@@ -17,21 +17,23 @@
 				<nav id="sideNav"><!-- MAIN MENU -->
 					<ul class="nav nav-list">
 					<!-- Super-admin Navbar -->
+					<?php if ($_SESSION['usertype'] == 'superAdmin') {
+					 ?>
 						<li><!-- dashboard -->
 							<a class="dashboard" href=""><!-- warning - url used by default by ajax (if eneabled) -->
 								<i class="main-icon fa fa-dashboard"></i> <span>Dashboard</span>
 							</a>
 						</li>
 						<li>
-							<a href="manageAdmin.php">
+							<a href="#">
 								<i class="fa fa-menu-arrow pull-right"></i>
-								<i class="main-icon fa fa-gear"></i> <span>Manage Admin Staff</span>
+								<i class="main-icon fa fa-bar-chart-o"></i> <span>Manage Admin Staf</span>
 							</a>
 						</li>
 						<li>
 							<a href="#">
 								<i class="fa fa-menu-arrow pull-right"></i>
-								<i class="main-icon fa fa-user"></i> <span>Student</span>
+								<i class="main-icon fa fa-bar-chart-o"></i> <span>Student</span>
 							</a>
 							<ul><!-- submenus -->
 								<li><a href="">Shortlisted</a></li>
@@ -41,10 +43,54 @@
 
 
 						<li><!-- dashboard -->
-							<a class="dashboard" href="..\index.php">
+							<a class="dashboard" href="logout.php">
 								<i class="main-icon fa fa-dashboard"></i> <span>Logout</span>
 							</a>
 						</li>
+						<?php 
+						} 
+						elseif ($_SESSION['usertype'] == 'staff') {
+						?>
+
+
+						<li><!-- dashboard -->
+							<a class="dashboard" href=""><!-- warning - url used by default by ajax (if eneabled) -->
+								<i class="main-icon fa fa-dashboard"></i> <span>Dashboard</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-menu-arrow pull-right"></i>
+								<i class="main-icon fa fa-user"></i> <span>Applicant</span>
+							</a>
+							<ul><!-- submenus -->
+								<li><a href="">Shortlisted</a></li>
+								<li><a href="">Unshortlisted</a></li>
+							</ul>
+						</li>
+
+						<li>
+							<a href="#">
+								<i class=""></i>
+								<i class="main-icon fa fa-book"></i> <span>Screening Test</span>
+							</a>
+						</li>
+
+						<li>
+							<a href="#">
+								<i class=""></i>
+								<i class="main-icon fa fa-home"></i> <span>Local Goverment</span>
+							</a>
+						</li>
+
+						<li><!-- dashboard -->
+							<a class="dashboard" href="logout.php">
+								<i class="main-icon fa fa-dashboard"></i> <span>Logout</span>
+							</a>
+						</li>
+
+
+						<?php } ?>
 					</ul>
 					<!-- Ends of Super-admin Navbar -->
 

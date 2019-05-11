@@ -19,6 +19,7 @@ class user extends dbh
 		if($username == 'admin@zam.net' && $password == 'pass3word')
 		{
 			$_SESSION['user'] = $username;
+			$_SESSION['usertype'] = 'superAdmin';
 			$error = 0;
 			header('location:admin/home.php');
 		}
@@ -34,12 +35,14 @@ class user extends dbh
 				if($userType == 'staff')
 				{
 					$_SESSION['user'] = $username;
+					$_SESSION['usertype'] = $userType;
 					$error = 0;
 					header('location:staff/home.php');
 				}
 				elseif($userType == 'student')
 				{
 					$_SESSION['user'] = $username;
+					$_SESSION['usertype'] = $userType;
 					$error = 0;
 					header('location:student/home.php');
 				}
@@ -96,7 +99,8 @@ class user extends dbh
 		if (empty($this->checkAdminStaff($email))) 
 		{
 			$date = date('Y-m-d');
-			$insert = "INSERT INTO user_tb(email, password, usertype,date_create) Values('$email','$phone','admin','$date')";
+			$hash_phone = md5($phone)
+			$insert = "INSERT INTO user_tb(email, password, usertype,date_create) Values('$email','$hash_phone','staff','$date')";
 			$stmt = $this->connect()->query($insert);
 			if (!$stmt) {
 				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';

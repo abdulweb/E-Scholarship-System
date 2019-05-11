@@ -1,3 +1,8 @@
+.logo_name{
+  margin-top: 6px;
+  color: white;
+  text-transform: uppercase;
+}
 #registerForm {
   animation-duration: 3s;
   animation-name: slidein;
@@ -14,3 +19,4 @@
     width: 100%;
   }
 }
+

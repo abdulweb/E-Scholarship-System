@@ -24,13 +24,13 @@
 								<img class="user-avatar" alt="" src="assets/images/noavatar.jpg" height="34" /> 
 								<span class="user-name">
 									<span class="hidden-xs">
-										John Doe <i class="fa fa-angle-down"></i>
+										<?php echo $_SESSION['user']?> <i class="fa fa-angle-down"></i>
 									</span>
 								</span>
 							</a>
 							<ul class="dropdown-menu hold-on-click">
 								<li><!-- my calendar -->
-									<a href="calendar.html"><i class="fa fa-calendar"></i> Calendar</a>
+									<a href=""><i class="fa fa-calendar"></i> Calendar</a>
 								</li>
 								<li><!-- my inbox -->
 									<a href="#"><i class="fa fa-envelope"></i> Inbox
@@ -38,16 +38,16 @@
 									</a>
 								</li>
 								<li><!-- settings -->
-									<a href="page-user-profile.html"><i class="fa fa-cogs"></i> Settings</a>
+									<a href=""><i class="fa fa-cogs"></i> Settings</a>
 								</li>
 
 								<li class="divider"></li>
 
 								<li><!-- lockscreen -->
-									<a href="page-lock.html"><i class="fa fa-lock"></i> Lock Screen</a>
+									<a href=""><i class="fa fa-lock"></i> Lock Screen</a>
 								</li>
 								<li><!-- logout -->
-									<a href="page-login.html"><i class="fa fa-power-off"></i> Log Out</a>
+									<a href="../index.php"><i class="fa fa-power-off"></i> Log Out</a>
 								</li>
 							</ul>
 						</li>
