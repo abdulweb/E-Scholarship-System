@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("../phpmailer-master/class.phpmailer.php");
- include("../phpmailer-master/class.smtp.php");
+include("phpmailer-master/class.phpmailer.php");
+ include("phpmailer-master/class.smtp.php");
 /**
 * 
 */
@@ -170,7 +170,7 @@ class user extends dbh
 	}
 
 	public function getAdminStaff(){
-		$stmt = "SELECT * FROM user_tb where usertype ='staff'";
+		$stmt = "SELECT * FROM user_tb where usertype ='staff' ORDER BY email ASC";
 		$result = $this->connect()->query($stmt);
 		$numberrows = $result->num_rows;
 		if ($numberrows >0) {
@@ -186,8 +186,9 @@ class user extends dbh
                     <a href="delete.php?id='.htmlentities($rows['id']).'" class="btn btn-danger btn-sm" onclick="return confirm(\'sure to delete !\');" >Delete</a>
                     </td>
                 </tr>';
-                $counter++;
-			}
+                
+			$counter++;}
+
 			
 		}
 	}

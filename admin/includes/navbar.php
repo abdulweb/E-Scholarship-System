@@ -27,7 +27,7 @@
 						<li>
 							<a href="manageAdmin.php">
 								<i class="fa fa-menu-arrow pull-right"></i>
-								<i class="main-icon fa fa-bar-chart-o"></i> <span>Manage Admin Staf</span>
+								<i class="main-icon fa fa-bar-chart-o"></i> <span>Manage Admin Staff</span>
 							</a>
 						</li>
 						<li>
@@ -77,7 +77,7 @@
 						</li>
 
 						<li>
-							<a href="#">
+							<a href="manageLga.php">
 								<i class=""></i>
 								<i class="main-icon fa fa-home"></i> <span>Local Goverment</span>
 							</a>

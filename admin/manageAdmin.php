@@ -1,5 +1,5 @@
-<?php include '..\includes/dbh.php'; ?>
-<?php include '..\includes/user.php'; 
+<?php include 'includes/dbh.php'; ?>
+<?php include 'includes/user.php'; 
     $object->sessioncheck($_SESSION['user']);
     $_SESSION['message'] ='';
    ?>
@@ -30,7 +30,7 @@
 				<div id="panel-1" class="panel panel-info">
 						<div class="panel-heading">
 							<span class="title elipsis">
-								<strong class="text-black"> <i class="fa fa-gear"> </i> MANAGED DATATABLE</strong> <!-- panel title -->
+								<strong class="text-black"> <i class="fa fa-gear"> </i> MANAGED Admin Staff</strong> <!-- panel title -->
 							</span>
 
 							<!-- right options -->
@@ -141,7 +141,7 @@
 
 									</div>
 								</div>
-							</div>
+					</div>
 							<!-- sample modal content -->
 
 				</div>

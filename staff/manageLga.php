@@ -26,20 +26,16 @@
 
 				<div id="content" class="padding-20">
 
-					<!-- jQuery Knob -->
-					<div id="ui-knob" class="panel panel-default">
-
+					<div id="panel-1" class="panel panel-info">
 						<div class="panel-heading">
-
 							<span class="title elipsis">
-								<strong><?=date('Y'); ?> Summary</strong> <!-- panel title -->
+								<strong class="text-black"> <i class="fa fa-gear"> </i> MANAGED LGA</strong> <!-- panel title -->
 							</span>
 
 							<!-- right options -->
 							<ul class="options pull-right list-inline">
 								<li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
 								<li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
-								<li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
 							</ul>
 							<!-- /right options -->
 
@@ -47,41 +43,55 @@
 
 						<!-- panel content -->
 						<div class="panel-body">
-
-							<div class="row text-center">
-
-								<!-- <div class="col-md-4">
-									<h4>No of Applicant</h4>
-									<input class="knob"  value="44">
-								</div>
-
-								<div class="col-md-4">
-									<h4>No of Admin Staff</h4>
-									<input class="knob"  value="44">
-								</div>
-
-								<div class="col-md-4">
-									<h4>No of</h4>
-									<input class="knob"  value="44">
-								</div> -->
-
+						<div class="row">
+							<div class="col-md-12">
+								<?php
+									// if (isset($_POST['addStaffBtn'])) {
+									// 	$email = $_POST['staffEmail'];
+									// 	$phoneNo = $_POST['phoneNo'];
+									// 	$object->insertAdminStaff($email,$phoneNo);
+									// 	echo $_SESSION['message'];
+									// }
+								?>
 							</div>
+							<div class="col-md-9">
+								
+							</div>
+							<div class="col-md-3 ">
+								<button type="button" class="btn btn-3d btn-reveal btn-green pull right" data-toggle="modal" data-target="#myModal">
+									<i class="fa fa-home"></i>
+									<span>Add New Local Govertnment</span></button>
+							</div>
+						</div>
 
-							<br />
-							<br />
+							<table class="table table-striped table-bordered table-hover" id="datatable_sample">
+								<thead>
+									<tr>
+										<th>S/No</th>
+										<th>LGA Name</th>
+										<th>Date Create</th>
+										<th></th>
+									</tr>
+								</thead>
+
+								<tbody>
+									 <?php// $object->getAdminStaff(); ?>
+								</tbody>
+							</table>
 
 						</div>
 						<!-- /panel content -->
 
+						<!-- panel footer -->
 						<div class="panel-footer">
 
 
-	
+
 						</div>
+						<!-- /panel footer -->
 
 					</div>
-					<!-- /jQuery Knob -->
-
+					<!-- /PANEL -->
 
 				</div>
 			</section>

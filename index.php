@@ -4,6 +4,7 @@
 	include('includes/user.php');
 	unset($_SESSION['user']);
 	include('includes/headlink.php');
+	error_reporting(0);
  ?>
 	<!--
 		.boxed = boxed version
