@@ -263,8 +263,8 @@ class user extends dbh
                     <td id="name'.$rows['id'].'">'.$rows['name'].'</td>
                     <td>'.$rows['date_create'].'</td>
                     <td>
-                    <a href="#" onclick ="edit_row('.$rows['id'].')"> <i class="fa fa-pencil"></i></a>
-                    <a href="" class="save_btn"> <i class="fa fa-save"></i></a>
+                    <a href="#" onclick ="edit_row('.$rows['id'].')" id="edit_btn'.$rows['id'].'"> <i class="fa fa-pencil"></i></a>
+                    <a href="" id="save_btn'.$rows['id'].'" class="save_btn" onclick ="save_row('.$rows['id'].')"> <i class="fa fa-save"></i></a>
                     <a href="delete.php?id='.htmlentities($rows['id']).'" onclick="return confirm(\'sure to delete !\');" ><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>';
@@ -274,6 +274,23 @@ class user extends dbh
 			
 		}
 	}
+
+	public function update_row($name,$id){
+
+	 $stmt = "UPDATE lga set name='$name' where id='$id'";
+	 $result = $this->connect()->query($stmt);
+	 if($result)
+	 {
+	 	echo "success";
+	 }
+	 else{
+	 	echo '<script>alert("Please Try Agin. Error Occured")</script>';
+	 }
+	 	
+	 exit();
+
+	}
+ 
 
 
 

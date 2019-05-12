@@ -21,7 +21,7 @@
 		<div id="wrapper">
 
 		
-            <?php include('..\admin/includes/navbar.php'); ?>
+            <?php include('..\admin/includes/navbar.php');?>
 
 			<?php include('..\admin/includes/header.php');?>
 
@@ -231,9 +231,40 @@
 
 					 document.getElementById("name"+id).innerHTML="<input type='text' class='form-control' autofocus id='name_text"+id+"' value='"+name+"'>";
 					    
-					 document.getElementById("edit_button"+id).style.display="none";
-					 document.getElementById("save_button"+id).style.display="block";
+					 document.getElementById("edit_btn"+id).style.display="none";
+					 document.getElementById("save_btn"+id).style.display="block";
 				}
+				// save function using ajax
+				function save_row(id)
+					{
+
+					  //alert('hey');
+					 var name=document.getElementById("name_text"+id).value;
+					    
+					 $.ajax
+					 ({
+					  type:'post',
+					  url:'modify_records.php',
+					  data:{
+					   edit_row:'edit_row',
+					   row_id:id,
+					   name:name
+					  },
+					  success:function(response) {
+					   if(response=="success")
+					   {
+					    document.getElementById("name"+id).innerHTML=name;
+					    document.getElementById("edit_btn"+id).style.display="block";
+					    document.getElementById("save_btn"+id).style.display="none";
+					   	alert('Record Updated Successfully');
+					   }
+					   else{
+					    //alert(response);
+					   }
+					  }
+
+					 });
+					}
 		</script>
 
 	</body>
