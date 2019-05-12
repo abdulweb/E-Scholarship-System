@@ -226,6 +226,7 @@ class user extends dbh
 					<strong> New Lga Added Successfully
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 					</strong> </div>';
+
 			}
 
 
@@ -247,6 +248,30 @@ class user extends dbh
 		}
 		else{
 
+		}
+	}
+
+	public function getLga(){
+		$stmt = "SELECT * FROM lga ORDER BY name ASC";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			$counter = 1;
+			while ($rows= $result->fetch_assoc()) {
+				echo '<tr>
+                    <td>'.$counter.'</td>
+                    <td id="name'.$rows['id'].'">'.$rows['name'].'</td>
+                    <td>'.$rows['date_create'].'</td>
+                    <td>
+                    <a href="#" onclick ="edit_row('.$rows['id'].')"> <i class="fa fa-pencil"></i></a>
+                    <a href="" class="save_btn"> <i class="fa fa-save"></i></a>
+                    <a href="delete.php?id='.htmlentities($rows['id']).'" onclick="return confirm(\'sure to delete !\');" ><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>';
+                
+			$counter++;}
+
+			
 		}
 	}
 

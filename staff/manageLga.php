@@ -6,6 +6,11 @@
 
 	include('..\admin/includes/headlink.php');
  ?>
+ <style type="text/css">
+ .save_btn{
+ 	display: none;
+ }
+ </style>
 	<!--
 		.boxed = boxed version
 	-->
@@ -74,7 +79,7 @@
 								</thead>
 
 								<tbody>
-									 <?php// $object->getAdminStaff(); ?>
+									 <?php $object->getLga(); ?>
 								</tbody>
 							</table>
 
@@ -143,7 +148,93 @@
 
 	
 		<!-- JAVASCRIPT FILES -->
+		
 		<?php include('..\admin/includes/js.php'); ?>
+		<script type="text/javascript">
+			loadScript(plugin_path + "datatables/js/jquery.dataTables.min.js", function(){
+				loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){
+
+					if (jQuery().dataTable) {
+
+						var table = jQuery('#datatable_sample');
+						table.dataTable({
+							"columns": [{
+								"orderable": false
+							}, {
+								"orderable": true
+							}, {
+								"orderable": false
+							}, {
+								"orderable": false
+							}],
+							"lengthMenu": [
+								[5, 15, 20, -1],
+								[5, 15, 20, "All"] // change per page values here
+							],
+							// set the initial value
+							"pageLength": 5,            
+							"pagingType": "bootstrap_full_number",
+							"language": {
+								"lengthMenu": "  _MENU_ records",
+								"paginate": {
+									"previous":"Prev",
+									"next": "Next",
+									"last": "Last",
+									"first": "First"
+								}
+							},
+							"columnDefs": [{  // set default column settings
+								'orderable': false,
+								'targets': [0]
+							}, {
+								"searchable": false,
+								"targets": [0]
+							}],
+							"order": [
+								[1, "asc"]
+							] // set first column as a default sort by asc
+						});
+
+						var tableWrapper = jQuery('#datatable_sample_wrapper');
+
+						table.find('.group-checkable').change(function () {
+							var set = jQuery(this).attr("data-set");
+							var checked = jQuery(this).is(":checked");
+							jQuery(set).each(function () {
+								if (checked) {
+									jQuery(this).attr("checked", true);
+									jQuery(this).parents('tr').addClass("active");
+								} else {
+									jQuery(this).attr("checked", false);
+									jQuery(this).parents('tr').removeClass("active");
+								}
+							});
+							jQuery.uniform.update(set);
+						});
+
+						table.on('change', 'tbody tr .checkboxes', function () {
+							jQuery(this).parents('tr').toggleClass("active");
+						});
+
+						tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+
+					}
+
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			 function edit_row(id)
+				{
+				    //alert('hey');
+					 var name=document.getElementById("name"+id).innerHTML;
+
+					 document.getElementById("name"+id).innerHTML="<input type='text' class='form-control' autofocus id='name_text"+id+"' value='"+name+"'>";
+					    
+					 document.getElementById("edit_button"+id).style.display="none";
+					 document.getElementById("save_button"+id).style.display="block";
+				}
+		</script>
 
 	</body>
 </html>
