@@ -1,6 +1,7 @@
 <?php include 'includes/dbh.php'; ?>
 <?php include 'includes/user.php'; 
     $object->sessioncheck($_SESSION['user']);
+    echo $_SESSION['message'] = '';
    ?>
 <?php 
 
@@ -54,7 +55,7 @@
 									if (isset($_POST['addLgaBtn'])) {
 										$lgaName = strtoupper($_POST['lgaName']);
 										$object->insertLga($lgaName);
-										//echo $_SESSION['message'];
+										echo $_SESSION['message'];
 									}
 								?>
 							</div>
@@ -237,8 +238,6 @@
 				// save function using ajax
 				function save_row(id)
 					{
-
-					  //alert('hey');
 					 var name=document.getElementById("name_text"+id).value;
 					    
 					 $.ajax

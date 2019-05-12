@@ -194,18 +194,18 @@ class user extends dbh
 	}
 
 	public function delete($id){
-		$stmt = "DELETE FROM user_tb WHERE id = '$id'";
+		$stmt = "DELETE FROM lga WHERE id = '$id'";
 		$result = $this->connect()->query($stmt);
 		if (!$result) {
 			$_SESSION['message'] = '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
-			header('location:manageAdmin.php');
+			header('location:manageLga.php');
 		}
 		else{
 			$_SESSION['message'] = '<div class ="alert alert-success"> 
-						<strong> Staff Record Deleted
+						<strong> Lga Record Deleted
 						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 						</strong> </div>';
-			header('location:manageAdmin.php');
+			header('location:manageLga.php');
 		}
 	}
 
