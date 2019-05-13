@@ -2,6 +2,7 @@
 session_start();
 include("../phpmailer-master/class.phpmailer.php");
  include("../phpmailer-master/class.smtp.php");
+ error_reporting(0);
 /**
 * 
 */
@@ -289,6 +290,95 @@ class user extends dbh
 	 	
 	 exit();
 
+	}
+
+	public function lga()
+	{
+		$stmt = "SELECT * FROM lga";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			while ($rows = $result->fetch_assoc()) {
+				echo '<div class="toggle primary">
+						<div class="toggle">
+							<label>'.$rows['name'].'</label>
+							<div class="toggle-content"> 
+							<a href="" class="btn btn-success btn-sm pull right pull-right m-r-15 m-b-15" data-toggle="modal" data-target="#myModal">Add Question</a>'
+							.$this->lgaQuestion($rows['id']).'
+								
+							</div>
+						</div>
+			</div>';
+			}
+		}
+	}
+
+	public function lgaQuestion($id)
+	{
+		$stmt = "SELECT * FROM question_tb where lga_id = '$id' ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			$counter = 1;
+			while ($rows= $result->fetch_assoc()) {
+				return '<table class="table table-bordered">
+						<tr>
+							<th>S/No</th>
+							<th>Question</th>
+							<th>Option 1</th>
+							<th>Option 2</th>
+							<th>Option 3</th>
+							<th>Option 4</th>
+							<th>Correct Answer</th>
+							<th></th>
+						</tr>
+						<tr>
+		                    <td>'.$counter.'</td>
+		                    <td >'.$rows['question'].'</td>
+		                    <td>'.$rows['option1'].'</td>
+		                    <td>'.$rows['option2'].'</td>
+		                    <td>'.$rows['option3'].'</td>
+		                    <td>'.$rows['option4'].'</td>
+		                    <td>'.$rows['correctAnswer'].'</td>
+		                    <td>
+		                    <a href="#" onclick ="edit_row('.$rows['id'].')" id="edit_btn'.$rows['id'].'"> <i class="fa fa-pencil"></i></a>
+		                    <a href="" id="save_btn'.$rows['id'].'" class="save_btn" onclick ="save_row('.$rows['id'].')"> <i class="fa fa-save"></i></a>
+		                    <a href="delete.php?id='.htmlentities($rows['id']).'" onclick="return confirm(\'sure to delete !\');" ><i class="fa fa-trash"></i></a>
+		                    </td>
+		                </tr>
+                </table>';
+                
+			$counter++;}
+
+			
+		}
+		else
+			return 'No question add for this Local Government';
+
+	}
+	public function allLga()
+	{
+		$stmt = "SELECT * FROM lga";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			echo '<select class="form-control" name="lgaID" required>';
+			echo '<option class="form-control"  value="">Select Local Government</option>';
+			while ($rows = $result->fetch_assoc()) {
+				echo '<option class="form-control"  value="'.$rows['id'].'">'.$rows['name'].'</option>';
+			}
+			echo '</select>';
+		}
+	}
+	public function storeQuestion($question,$option1,$option2,$option3,$option4,$correctAns,$lgaID)
+	{
+		$stmt = "INSERT into question_tb(question,option1,option2,option3,option4,correctAnswer,lga_id) Values('$question','$option1','$option2','$option3','$option4','$correctAns','$lgaID')";
+		$result = $this->connect()->query($stmt);
+		if ($result) {
+			echo "<script>alert('Question Add Successfully')</script>";
+		}
+		else
+			echo "<script>alert('Error Occured')</script>";
 	}
  
 

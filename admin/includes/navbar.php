@@ -71,9 +71,13 @@
 
 						<li>
 							<a href="#">
-								<i class=""></i>
+								<i class="fa fa-menu-arrow pull-right"></i>
 								<i class="main-icon fa fa-book"></i> <span>Screening Test</span>
 							</a>
+							<ul><!-- submenus -->
+								<li><a href="">Test</a></li>
+								<li><a href="testQuestion.php">Question</a></li>
+							</ul>
 						</li>
 
 						<li>
