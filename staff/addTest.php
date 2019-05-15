@@ -1,6 +1,5 @@
 <?php include 'includes/dbh.php'; ?>
 <?php include 'includes/user.php'; 
- require_once ('includes/function.php');
     $object->sessioncheck($_SESSION['user']);
     echo $_SESSION['message'] = '';
    ?>
@@ -36,7 +35,7 @@
 					<div id="panel-1" class="panel panel-info">
 						<div class="panel-heading">
 							<span class="title elipsis">
-								<strong class="text-black"> <i class="fa fa-gear"> </i> MANAGED TEST</strong> <!-- panel title -->
+								<strong class="text-black"> <i class="fa fa-gear"> </i> Create TEST</strong> <!-- panel title -->
 							</span>
 
 							<!-- right options -->
@@ -52,12 +51,17 @@
 						<div class="panel-body">
 						<div class="row">
 							<div class="col-md-12">
-							<?php if (isset($errorMessage) || !empty($errorMessage)) {
-								echo $errorMessage;
+							<?php if (isset($_POST['createTest'])) {
+										$testname = $_POST['test_name'];
+										$start_date = $_POST['start_date'];
+										$end_date = $_POST['end_date'];
+										$release_result = $_POST['release_result'];
+										$mark = $_POST['test_mark'];
+										$object->storeTest($testname,$start_date,$end_date,$mark,$release_result);
 							} ?>
 								<p class="text-danger mt-l-10">All Field with asterik (<span class="required">*</span>) must be fill</p>
 								
-								<form action="addTest.php" method="post">
+								<form action="" method="post">
 									<fieldset>
 
 										<div class="row">
@@ -88,11 +92,12 @@
 										<div class="row">
 											<div class="form-group">
 												<div class="col-md-12 col-sm-12">
-													<label class="switch switch-success switch-round">
-														<input type="checkbox" checked="" name="release_result">
-														<span class="switch-label" data-on="YES" data-off="NO"></span>
-														<span> Release Result?</span>
-													</label>
+													<label>Show Test Result </label>
+													<select name="release_result" class="form-control pointer"required>
+														<option value="">--- Select ---</option>
+														<option value="1">Yes</option>
+														<option value="0">No</option>
+													</select>
 												</div>
 											</div>
 										</div>
@@ -138,6 +143,9 @@
 		<!-- JAVASCRIPT FILES -->
 		
 		<?php include('..\admin/includes/js.php'); ?>
+		<script type="text/javascript">
+			
+		</script>
 
 	</body>
 </html>

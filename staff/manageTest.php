@@ -50,15 +50,7 @@
 						<!-- panel content -->
 						<div class="panel-body">
 						<div class="row">
-							<div class="col-md-12">
-								<?php
-									if (isset($_POST['addLgaBtn'])) {
-										$lgaName = strtoupper($_POST['lgaName']);
-										$object->insertLga($lgaName);
-										echo $_SESSION['message'];
-									}
-								?>
-							</div>
+							<div class="col-md-12"></div>
 							<div class="col-md-9">
 								
 							</div>
@@ -79,18 +71,32 @@
 										<th>End Date</th>
 										<th>Release Result</th>
 										<th>Mark</th>
+										<th>Year</th>
 										<th></th>
 									</tr>
 								</thead>
 
 								<tbody>
-									 <td></td>
-									 <td></td>
-									 <td></td>
-									 <td></td>
-									 <td></td>
-									 <td></td>
-									 <td></td>
+								<?php 
+									$results = $object->getStoreTest();
+									$counter=1; 
+									foreach ($results as $result)
+									{?>
+									<tr>
+										<td><?=$counter?></td>
+										 <td><?=$result['testName']?></td>
+										 <td><?=$result['startDate']?></td>
+										 <td><?=$result['endDate']?></td>
+										 <td><?=$object->checkStatus($result['releaseResult'])?></td>
+										 <td><?=$result['mark']?></td>
+										 <td><?=$result['year']?></td>
+										 <td></td>
+									</tr>
+									<?php
+									$counter++;
+								}
+									?>
+									 
 								</tbody>
 							</table>
 

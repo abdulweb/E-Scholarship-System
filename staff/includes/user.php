@@ -347,6 +347,75 @@ class user extends dbh
 		else
 			echo "<script>alert('Error Occured')</script>";
 	}
+
+	public function storeTest($testname,$start_date,$end_date,$mark,$release_result)
+	{
+		
+		if (empty($testname) || empty($start_date) || empty($end_date) || empty($release_result) || empty($mark)) 
+		{
+				$errorMessage = 'All field is requried';
+		}
+
+		else{
+			$currentYear = date('Y');
+			$newTestName = strtoupper($testname);
+			$checkstart = strtotime($start_date);
+			$checkend = strtotime($end_date);
+			if ($checkstart > $checkend) {
+				echo '<div class ="alert alert-danger"> <strong> Start Date can Not Be Greater than End Date 
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						</strong> </div>';
+			}
+			else{
+				$stmt = "SELECT * FROM test_tb where year = '$currentYear'";
+				$result = $this->connect()->query($stmt);
+				if ($result->num_rows > 0 ) {
+					echo '<div class ="alert alert-danger"> <strong> Test Has be created for this year 
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						</strong> </div>';
+				}
+				else{
+					$stmt = "INSERT INTO test_tb(testName,startDate,endDate,mark,releaseResult,year)values('$newTestName','$start_date','$end_date','$mark','$release_result','$currentYear')";
+					$result = $this->connect()->query($stmt);
+					if ($result) {
+						echo '<div class ="alert alert-success"> 
+							<strong> New Test Create Successfully
+							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+							</strong> </div>';
+					}
+					else
+						echo '<div class ="alert alert-danger"> <strong> Sorry Error Ocurr 
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						</strong> </div>';
+				}
+			}
+			
+		}
+	}
+
+	public function getStoreTest()
+	{
+		$stmt = "SELECT * FROM test_tb ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			$counter = 1;
+			while ($rows= $result->fetch_assoc()) {
+				$data[] = $rows;
+			}
+			return $data;
+		}
+	}
+	public function checkStatus($id)
+	{
+		if ($id == 0) 
+		{
+			return 'Yes';
+		}
+		else
+			return 'No';
+	}
+	
  
 
 
