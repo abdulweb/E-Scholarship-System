@@ -75,7 +75,7 @@
 								<i class="main-icon fa fa-book"></i> <span>Screening Test</span>
 							</a>
 							<ul><!-- submenus -->
-								<li><a href="">Test</a></li>
+								<li><a href="manageTest.php">Test</a></li>
 								<li><a href="testQuestion.php">Question</a></li>
 							</ul>
 						</li>

@@ -62,7 +62,53 @@
 
 						<a href="" class="btn btn-success pull right pull-right m-r-15" data-toggle="modal" data-target="#myModal">Add Question</a>
 						
-							<?php $object->lga() ?>
+							<?php
+							$results = $object->lga();
+							foreach ($results as $result) {?>
+								<div class="toggle primary">
+									<div class="toggle">
+										<label><?=$result['name'];?></label>
+										<div class="toggle-content"> 
+										<a href="" class="btn btn-success btn-sm pull right pull-right m-r-15 m-b-15" data-toggle="modal" data-target="#myModal">Add Question</a>
+										
+											<table class="table table-bordered">
+													<tr>
+														<th>S/No</th>
+														<th>Question</th>
+														<th>Option 1</th>
+														<th>Option 2</th>
+														<th>Option 3</th>
+														<th>Option 4</th>
+														<th>Correct Answer</th>
+														<th></th>
+													</tr>
+													<?php $questions = $object->lgaQuestion($result['id']);
+															$counter=1;
+															foreach ($questions as $question) {?>
+														<tr>
+										                    <td><?=$counter?></td>
+										                    <td ><?=$question['question']?></td>
+										                    <td><?=$question['option1']?></td>
+										                    <td><?=$question['option2']?></td>
+										                    <td><?=$question['option3']?></td>
+										                    <td><?=$question['option4']?></td>
+										                    <td><?=$question['correctAnswer']?></td>
+										                    <td>
+										                   
+										                    </td>
+										                </tr>
+											<?php
+											$counter++;}
+											?>
+											</table>
+
+										</div>
+									</div>
+								</div>
+							<?php
+							}
+							?>
+							
 							
 
 						</div>
