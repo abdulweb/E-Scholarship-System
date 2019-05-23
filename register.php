@@ -1,86 +1,91 @@
+<!DOCTYPE html>
+<html>
 
-<?php include('includes/headlink.php'); ?>
-	<!--
-		.boxed = boxed version
-	-->
-	<body>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Sign Up | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-		<div class="padding-15">
+    <!-- Bootstrap Core Css -->
+    <link href="student/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-			<div class="login-box">
+    <!-- Waves Effect Css -->
+    <link href="student/plugins/node-waves/waves.css" rel="stylesheet" />
 
-				<!--
-				<div class="alert alert-danger">Complete all fields!</div>
-				-->
+    <!-- Animation Css -->
+    <link href="student/plugins/animate-css/animate.css" rel="stylesheet" />
 
-				<!-- registration form -->
-				<form action="" method="post" class="sky-form boxed" novalidate="novalidate" id="registerForm">
-					<header><i class="fa fa-users"></i> Create Account</header>
-					
-					<fieldset>					
-						<label class="input">
-							<i class="icon-append fa fa-envelope"></i>
-							<input type="email" placeholder="Email address" name="username" required="">
-							<b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
-						</label>
-					
-						<label class="input">
-							<i class="icon-append fa fa-lock"></i>
-							<input type="password" placeholder="Password" name="password" required="">
-							<b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
-						</label>
-					
-						<label class="input">
-							<i class="icon-append fa fa-lock"></i>
-							<input type="password" placeholder="Confirm password" name="confirmPassword" required="">
-							<b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
-						</label>
-					</fieldset>
-						
-					<fieldset>
+    <!-- Custom Css -->
+    <link href="student/css/style.css" rel="stylesheet">
+</head>
 
-					</fieldset>
+<body class="signup-page" style="background: rgb(241,242,247);">
+    <div class="signup-box">
+        <div class="logo">
+            
+            <h3 class="text-center text-success">Zamfara Scholarship E-System</h3>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form id="sign_up" method="POST" action="">
+                    <div class="msg"></div>
+                    
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">email</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="password" minlength="6" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="confirm" minlength="6" placeholder="Confirm Password" required>
+                        </div>
+                    </div>
 
-					<footer>
-						<button type="submit" class="btn btn-primary btn-block pull-right"><i class="fa fa-check"></i> Create Account</button>
-					</footer>
+                    <button class="btn btn-block btn-lg bg-green waves-effect" type="submit" name="signUpBtn">SIGN UP</button>
 
-				</form>
-				<!-- /registration form -->
+                    <div class="m-t-25 m-b--5 align-center">
+                        Already a member?<a href="index.php"> Login Here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-				<hr />
+    <!-- Jquery Core Js -->
+    <script src="student/plugins/jquery/jquery.min.js"></script>
 
-				<div class="socials margin-top-10 text-center"><!-- more buttons: ui-buttons.html -->
-					Already a member? <a href="index.php">login</a>
-				</div>
+    <!-- Bootstrap Core Js -->
+    <script src="student/plugins/bootstrap/js/bootstrap.js"></script>
 
-			</div>
-            <?php include('includes/footer.php'); ?>
+    <!-- Waves Effect Plugin Js -->
+    <script src="student/plugins/node-waves/waves.js"></script>
 
-		</div>
+    <!-- Validation Plugin Js -->
+    <script src="student/plugins/jquery-validation/jquery.validate.js"></script>
 
+    <!-- Custom Js -->
+    <script src="student/js/admin.js"></script>
+    <script src="student/js/pages/examples/sign-up.js"></script>
+</body>
 
-	
-		<!-- JAVASCRIPT FILES -->
-		<?php include('includes/js.php'); ?>
-
-		<!-- PAGE LEVEL SCRIPTS -->
-		<script type="text/javascript">
-
-			/**
-				Checkbox on "I agree" modal Clicked!
-			**/
-			jQuery("#terms-agree").click(function(){
-				jQuery('#termsModal').modal('toggle');
-
-				// Check Terms and Conditions checkbox if not already checked!
-				if(!jQuery("#checked-agree").checked) {
-					jQuery("input.checked-agree").prop('checked', true);
-				}
-				
-			});
-		</script>
-
-	</body>
 </html>

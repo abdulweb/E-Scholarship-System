@@ -15,7 +15,7 @@
 		<div class="padding-15">
 
 			<div class="login-box">
-			<h3 class="text-center text-danger">Zamfara Scholarship Board</h3>
+			<h3 class="text-center text-danger">Zamfara Scholarship E-System</h3>
 
 				<!-- login form -->
 				<form action="" method="post" class="sky-form boxed">
