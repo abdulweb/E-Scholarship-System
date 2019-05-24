@@ -1,3 +1,4 @@
+<?php include('includes/function.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -21,8 +22,14 @@
     <!-- Animation Css -->
     <link href="student/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Sweetalert Css -->
+    <link href="student/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="student/css/style.css" rel="stylesheet">
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css"/>
 </head>
 
 <body class="signup-page" style="background: rgb(241,242,247);">
@@ -33,7 +40,7 @@
         </div>
         <div class="card">
             <div class="body">
-                <form id="sign_up" method="POST" action="">
+                <form id="sign_up" method="POST" action="" id="registerForm">
                     <div class="msg"></div>
                     
                     <div class="input-group">
@@ -82,6 +89,9 @@
 
     <!-- Validation Plugin Js -->
     <script src="student/plugins/jquery-validation/jquery.validate.js"></script>
+    <!-- Sweet alert -->
+
+    <script src="student/plugins/sweetalert/sweetalert.min.js"></script>
 
     <!-- Custom Js -->
     <script src="student/js/admin.js"></script>

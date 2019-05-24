@@ -12,18 +12,8 @@
 
 <!-- Morris Plugin Js -->
 <script src="plugins/raphael/raphael.min.js"></script>
+
 <script src="plugins/morrisjs/morris.js"></script>
-
-<!-- ChartJs -->
-<script src="plugins/chartjs/Chart.bundle.js"></script>
-
-<!-- Flot Charts Plugin Js -->
-<script src="plugins/flot-charts/jquery.flot.js"></script>
-<script src="plugins/flot-charts/jquery.flot.resize.js"></script>
-<script src="plugins/flot-charts/jquery.flot.pie.js"></script>
-<script src="plugins/flot-charts/jquery.flot.categories.js"></script>
-<script src="plugins/flot-charts/jquery.flot.time.js"></script>
-
 <!-- Sparkline Chart Plugin Js -->
 <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
 
@@ -39,12 +29,21 @@
 <!-- JQuery Steps Plugin Js -->
 <script src="plugins/jquery-steps/jquery.steps.js"></script>
 
+ <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
 <!-- Sweet Alert Plugin Js -->
 <script src="plugins/sweetalert/sweetalert.min.js"></script>
 
 <!-- Custom Js -->
 <script src="js/admin.js"></script>
+
 <script src="js/pages/forms/form-wizard.js"></script>
+
+<script src="js/pages/forms/basic-form-elements.js"></script>
+
+<script src="js/pages/forms/advanced-form-elements.js"></script>
+
 <script src="js/pages/index.js"></script>
 
 <!-- Demo Js -->

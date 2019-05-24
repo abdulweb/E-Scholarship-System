@@ -27,7 +27,8 @@ class user extends dbh
 		}
 		else
 		{
-			$sql = "SELECT * FROM user_tb where email = '$username' AND password = '$password'";
+			$secret = md5($password);
+			$sql = "SELECT * FROM user_tb where email = '$username' AND password = '$secret'";
 			$result = $this->connect()->query($sql);
 			$numberrows = $result->num_rows;
 			if ($numberrows > 0) 
@@ -35,7 +36,8 @@ class user extends dbh
 				$rows= $result->fetch_assoc();
 				$userType = $rows['usertype'];
 				if($userType == 'staff')
-				{
+				// {	$get_image = "SELECT * FROM application_document where user_id = '$rows['user_id']'";
+				// 	$result = $this->connect()->query($get_image)->fetch_assoc();
 					$_SESSION['user'] = $username;
 					$_SESSION['usertype'] = $userType;
 					$error = 0;
@@ -46,7 +48,7 @@ class user extends dbh
 					$_SESSION['user'] = $username;
 					$_SESSION['usertype'] = $userType;
 					$error = 0;
-					header('location:student/home.php');
+					header('location:student/index.php');
 				}
 				else{
 					$error = 1;
@@ -286,80 +288,36 @@ class user extends dbh
 	}
 
 	
-	public function getstudent(){
-		$stmt = "SELECT * FROM students";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				echo '<tr>
-                    <td>'.$counter.'</td>
-                    <td>'.$rows['student_fname']. " ". $rows['student_oname'].'</td>
-                    <td>'.$this->getclassName($rows['student_class']).'</td>
-                    <td>'. ''.'</td>
-                </tr>';
-                $counter++;
-			}
-			
-		}
-	}
+	/*===============Student Query=============*/
 
-	public function insertSubject($name, $datet)
+	public function signup($email,$password,$date)
 	{
-		if (empty($this->checksubject(($name)))) 
-		{
-			$upname = ucwords($name);
-			$insert = "INSERT INTO subjects(subject_name, date_create) Values('$upname','$datet')";
-			$stmt = $this->connect()->query($insert);
-			if (!$stmt) {
-				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
+		$stmt = "SELECT * FROM user_tb where email = '$email'";
+		$result = $this->connect()->query($stmt);
+		if ($result->num_rows > 0 ) {
+			echo '<script type="text/javascript">';
+			echo 'setTimeout(function () { swal("Sorry!!","User Already Exit !","error");';
+			echo '}, 1000);</script>';
+		}
+		else{
+			$hashpassword = md5($password);
+			$stmt = "INSERT INTO user_tb(email,password,usertype,date_create)values('$email','$hashpassword','student','$date')";
+			$result = $this->connect()->query($stmt);
+			if ($result) {
+				echo '<script type="text/javascript">';
+				echo 'setTimeout(function () { swal("Congratulation!!","Account Created Successfully !","success");';
+				echo '}, 1000);</script>';
 			}
 			else
 			{
-				echo '<div class ="alert alert-success"> <strong> New Subject Added Successfully </strong> </div>';
+				echo '<script type="text/javascript">';
+				echo 'setTimeout(function () { swal("Sorry!!","Error Occured. Try again !","error");';
+				echo '}, 1000);</script>';
 			}
-
-		}
-		else{
-			echo $this->checksubject($name);
-		}
-		
-	}
-
-	public function checksubject($name)
-	{
-		$upname = ucwords($name);
-		$stmt = "SELECT * FROM subjects where subject_name = '$upname'";
-		$result = $this->connect()->query($stmt); 
-		if (($result->num_rows)> 0) {
-			return '<div class ="alert alert-danger"> <strong> Sorry !!! Subject Name Already Exist </strong> </div>';
-			 
-		}
-		else{
-
+				
 		}
 	}
-
-	public function getAllSubject()
-	{
-		$stmt = "SELECT * FROM subjects";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				echo '<tr>
-                    <td>'.$counter.'</td>
-                    <td>'.$rows['subject_name'].'</td>
-                    <td><button class="btn btn-danger">Delete</button></td>
-                </tr>';
-                $counter++;
-			}
-			
-		}
-	}
-
+	/*===========Ends of Student Query============*/
 	public function getsubjectoption()
 	{
 		$stmt = "SELECT * FROM subjects";
