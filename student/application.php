@@ -138,7 +138,7 @@
                                     <div class="form-group form-float">
                                             <div><label class="form-label">Passport <span class="text-danger">*</span></label></div>
                                             <div class="form-line">
-                                                <input type="file" name="passort" class="form-control" required>
+                                                <input type="file" name="passport" class="form-control" required>
                                                 
                                             </div>
                                     </div>

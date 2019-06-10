@@ -9,6 +9,7 @@
 		$gender = $_POST['gender'];
 		$maritalStatus = $_POST['maritalStatus'];
 		$religion = $_POST['religion'];
+		$lga_id = $_POST['lga_id'];
 
 		//step two Institution info
 		$admissionNo = $_POST['admissionNo'];
@@ -17,12 +18,19 @@
 		$department = $_POST['department'];
 		$level = $_POST['level'];
 
-		//step two Bank Info
-		$admissionNo = $_POST['admissionNo'];
-		$institue = $_POST['institue'];
-		$faculty = $_POST['faculty'];
-		$department = $_POST['department'];
-		$level = $_POST['level'];
+		//step three Bank Info
+		$bankName = $_POST['bankName'];
+		$accountName = $_POST['accountName'];
+		$accountType = $_POST['accountType'];
+		$accountNo = $_POST['accountNo'];
+
+	
 	}
 
 ?>
+		
+		//step three Bank Info
+		$bankName = $_POST['bankName'];
+		$accountName = $_POST['accountName'];
+		$accountType = $_POST['accountType'];
+		$accountNo = $_POST['accountNo'];

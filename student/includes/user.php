@@ -16,124 +16,126 @@ class user extends dbh
 	// 	# code...
 	// }
 
-
-	public function login($username, $password)
+	public function applications()
 	{
-		if($username == 'admin@zam.net' && $password == 'pass3word')
-		{
-			$_SESSION['user'] = $username;
-			$_SESSION['usertype'] = 'superAdmin';
-			$error = 0;
-			header('location:admin/home.php');
+		if (empty($firstname) || empty($lastname) || empty($dob) || empty($phoneNo) || empty($admissionNo) || empty($institue) || empty($faculty) || empty($department) || empty($level) || empty($bankName) || empty($accountName) || empty($accountType) || empty($accountNo)) {
+			$errorMesg = '<div class="alert alert-danger">All field is Required</div>';
 		}
 		else
 		{
-			$sql = "SELECT * FROM user_tb where email = '$username' AND password = '$password'";
-			$result = $this->connect()->query($sql);
-			$numberrows = $result->num_rows;
-			if ($numberrows > 0) 
+					$target_dir = "uploads/";
+                    $target_file1 = $target_dir . basename($_FILES["passport"]["name"]);
+                    $target_file2 = $target_dir . basename($_FILES["indigineLetter"]["name"]);
+                    $target_file3 = $target_dir . basename($_FILES["confirmationLetter"]["name"]);
+                    $uploadOk = 1;
+                    $imageFileType = pathinfo($target_file1,PATHINFO_EXTENSION);
+                    $indigineLetterFileType = pathinfo($target_file2,PATHINFO_EXTENSION);
+                    $confirmationLetterFileType = pathinfo($target_file3,PATHINFO_EXTENSION);
+	                $check = getimagesize($_FILES["passport"]["tmp_name"]);
+                    if($check !== false) {
+                        //echo "File is an image - " . $check["mime"] . ".";
+                        $uploadOk = 1;
+                    } 
+                    else {
+                        $msg = "Passport is not an image. Please select Image file";
+                        $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <i class="mdi mdi-block-helper"></i><strong>Oh shit!!</strong>'.$msg.' 
+                                        </div>';
+                        $uploadOk = 0;
+                    }
+                    // check passport
+                    if ($_FILES["passport"]["size"] > 5000000) 
+	                  {
+	                      $msg = "Sorry, your file is too large. Must not be more than 5MB";
+	                      $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                                <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+	                                </div>';
+	                      $uploadOk = 0;
+	                  }
+	                  // check indegineLetter
+	                  if ($_FILES["indigineLetter"]["size"] > 5000000) 
+                      {
+                          $msg = "Sorry, your file is too large. Must not be more than 5MB";
+                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+                                    </div>';
+                          $uploadOk = 0;
+                      }
+                       if ($_FILES["confirmationLetter"]["size"] > 5000000) 
+                      {
+                          $msg = "Sorry, your file is too large. Must not be more than 5MB";
+                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+                                    </div>';
+                          $uploadOk = 0;
+                      }
+
+                      // Allow certain file formats
+                     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") 
+                      {
+                          $msg =  " Sorry, only JPG, JPEG, PNG  format is allowed for Passport.";
+                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+                                    </div>';
+                          $uploadOk = 0;
+                      }
+                      // Allow certain file formats for indigine letter
+                      if($indigineLetterFileType != "jpg" && $indigineLetterFileType != "png" && $indigineLetterFileType != "jpeg") 
+                      {
+                          $msg =  " Sorry, only JPG, JPEG, PNG  format is allowed for indigine Letter.";
+                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+                                    </div>';
+                          $uploadOk = 0;
+                      }
+
+                      if($confirmationLetterFileType != "jpg" && $confirmationLetterFileType != "png" && $confirmationLetterFileType != "jpeg") 
+                      {
+                          $msg =  " Sorry, only JPG, JPEG, PNG  format is allowed for Confirmation Letter.";
+                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+                                    </div>';
+                          $uploadOk = 0;
+                      }
+                      if ($uploadOk == 0) 
+                      {
+                          $msg =  "Sorry, your file was not uploaded. Please retry";
+                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
+                                    </div>';
+
+                      // if everything is ok, try to upload file
+                      }
+                      else
+                      {
+                      	if ( (move_uploaded_file($_FILES["passport"]["tmp_name"], $target_file1)) && (move_uploaded_file($_FILES["indigineLetter"]["tmp_name"], $target_file2) && (move_uploaded_file($_FILES["confirmationLetter"]["tmp_name"], $target_file3))
+                      	{
+                      		$stmt = "INSERT INTO application_tb(firstname,lastname,middlename,dob,institute,lga_id,phoneNo,admissionNo,gender,religion,maritalStatus,level,application_id,picture,indigne_letter,confirmation_letter,faculty,department) values('$firstname','$lastname','$middlename','$dob','$institue','$lga_id','$phoneNo','$admissionNo','$gender','$religion','$maritalStatus','$level','$application_id','$target_file1','$target_file2','$target_file3','$faculty','$department')";
+                      		if ($this->connect()->query($stmt)) 
+                      		{
+								$inserts = "INSERT INTO banks(bankName, accountName, accountType, accountNumber,application_id) Values('$bankName','$accountName','$accountType',$accountNo')";
+							}
+                      	}
+                      	
+                      }
+		}
+	}
+
+		public function save_applicant(){
+			if (empty($this->checkapplicant($email,$admissionNo))) 
 			{
-				$rows= $result->fetch_assoc();
-				$userType = $rows['usertype'];
-				if($userType == 'staff')
-				{
-					$_SESSION['user'] = $username;
-					$_SESSION['usertype'] = $userType;
-					$error = 0;
-					header('location:staff/home.php');
-				}
-				elseif($userType == 'student')
-				{
-					$_SESSION['user'] = $username;
-					$_SESSION['usertype'] = $userType;
-					$error = 0;
-					header('location:student/home.php');
-				}
-				else{
-					$error = 1;
-					$oldmail = $username;
-					//return $oldmail;
-					echo  $this->messages($error);	
-				}
 				
-			}
-			else{
-				$error = 1;
-				$oldmail = $username;
-				//return $oldmail;
-				echo  $this->messages($error);	
-			}
-			
-		}
-		
-	}
 
-	public function messages($message)
-	{
-		if ($message == 1) {
-			return '<div class ="alert alert-danger"> Wrong username and password </div>';
-		}
-		if($message == 2)
-		{
-			return '<div class ="alert alert-danger"> Attension!!! Unthorize user </div>';
-		}
-		// else{
-		// 	return 'success';
-		// }
-	}
 
-	public function sessioncheck($sess)
-	{
-		if ($sess =='' or empty($sess) or $sess == null) 
-		{
-			header('location:..\index.php');
-		}
-		else{
-			//return $sess;
-		}
-	}
-	public function emptysession ($set){
-		unset($set);
-		header('location:..\index.php');
-	}
-
-	public function insertAdminStaff($email, $phone)
-	{
-		if (empty($this->checkAdminStaff($email))) 
-		{
-			$date = date('Y-m-d');
-			$hash_phone = substr(md5($phone), 0,8) ;
-			$Subject = 'Zamfara Schorlaship Board';
-			$Mssg = 'Your Login Detail is as follows  username : ' . $email . ' Password : ' . $hash_phone;
-			$mail = new PHPMailer();
-
-            $mail->IsSMTP();
-            $mail->SMTPAuth   = true;                  // enable SMTP authentication
-            $mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
-            $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-            $mail->Port       = 465; //or 587
-
-            $mail->Username   = "binraheem01@gmail.com";  // GMAIL username
-            $mail->Password   = "babatunde";            // GMAIL password
-            $mail ->SetFrom('Zamfara Schorlaship Board');
-
-            $mail->From     = $email;
-            $mail->FromName   = "no-reply";
-            $mail->Subject    = $Subject;
-            $mail->Body    = $Mssg; //Text Body
-            $mail->WordWrap   = 50; // set word wrap
-            $mail ->AddAddress($email);
-            // $mail->AddAttachment('images/'.$Uname.'.pdf');
-            if(!$mail->Send())
-            {
-               echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Message not Send. Please connect to internet </strong> </div>';
-               echo "Mailer Error: " . $mail->ErrorInfo;
-               exit;
-            }
-            else
-            {
-
-				$insert = "INSERT INTO user_tb(email, password, phone, usertype,date_create) Values('$email','$hash_phone','$phone','staff','$date')";
+				$insert = "INSERT INTO application_tb(firstname, lastname, middlename, dob,institute,lga_id,phoneNo,admissionNo,gender,religion,maritalStatus,level,application_id,document_id,) Values('$email','$hash_phone','$phone','staff','$date')";
 				$stmt = $this->connect()->query($insert);
 				if (!$stmt) {
 					echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
@@ -145,281 +147,26 @@ class user extends dbh
 						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 						</strong> </div>';
 				}
-
-            }
-
-
-		}
-		else{
-			echo $this->checkAdminStaff($email);
-		}
-		
-	}
-
-	public function checkAdminStaff($email){
-		$stmt = "SELECT * FROM user_tb where email = '$email'";
-		$result = $this->connect()->query($stmt); 
-		if (($result->num_rows)> 0) {
-			return '<div class ="alert alert-danger"> <strong> Sorry !!! Admin Staff Already Exist 
-			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			</strong> </div>';
-			 
-		}
-		else{
-
-		}
-	}
-
-	public function getAdminStaff(){
-		$stmt = "SELECT * FROM user_tb where usertype ='staff' ORDER BY email ASC";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				echo '<tr>
-                    <td>'.$counter.'</td>
-                    <td>'.$rows['email'].'</td>
-                    <td>'.$rows['phone'].'</td>
-                    <td>'.$rows['date_create'].'</td>
-                    <td>
-                    <a href="" class="btn btn-info btn-sm">View</a>
-                    <a href="delete.php?id='.htmlentities($rows['id']).'" class="btn btn-danger btn-sm" onclick="return confirm(\'sure to delete !\');" >Delete</a>
-                    </td>
-                </tr>';
-                
-			$counter++;}
-
-			
-		}
-	}
-
-	public function delete($id){
-		$stmt = "DELETE FROM lga WHERE id = '$id'";
-		$result = $this->connect()->query($stmt);
-		if (!$result) {
-			$_SESSION['message'] = '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
-			header('location:manageLga.php');
-		}
-		else{
-			$_SESSION['message'] = '<div class ="alert alert-success"> 
-						<strong> Lga Record Deleted
-						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						</strong> </div>';
-			header('location:manageLga.php');
-		}
-	}
-
-	public function insertLga($name)
-	{
-		if (empty($this->checkLga($name))) 
-		{
-			$date = date('Y-m-d');
-            
-			$insert = "INSERT INTO lga(name,date_create) Values('$name','$date')";
-			$stmt = $this->connect()->query($insert);
-			if (!$stmt) {
-				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
-			}
-			else
-			{
-				echo '<div class ="alert alert-success"> 
-					<strong> New Lga Added Successfully
-					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					</strong> </div>';
-
-			}
-
-
-		}
-		else{
-			echo $this->checkLga($name);
-		}
-		
-	}
-
-	public function checkLga($name){
-		$stmt = "SELECT * FROM lga where name = '$name'";
-		$result = $this->connect()->query($stmt); 
-		if (($result->num_rows)> 0) {
-			return '<div class ="alert alert-danger"> <strong> Sorry !!! Lga Already Exist 
-			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			</strong> </div>';
-			 
-		}
-		else{
-
-		}
-	}
-
-	public function getLga(){
-		$stmt = "SELECT * FROM lga ORDER BY name ASC";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				echo '<tr>
-                    <td>'.$counter.'</td>
-                    <td id="name'.$rows['id'].'">'.$rows['name'].'</td>
-                    <td>'.$rows['date_create'].'</td>
-                    <td>
-                    <a href="#" onclick ="edit_row('.$rows['id'].')" id="edit_btn'.$rows['id'].'"> <i class="fa fa-pencil"></i></a>
-                    <a href="" id="save_btn'.$rows['id'].'" class="save_btn" onclick ="save_row('.$rows['id'].')"> <i class="fa fa-save"></i></a>
-                    <a href="delete.php?id='.htmlentities($rows['id']).'" onclick="return confirm(\'sure to delete !\');" ><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>';
-                
-			$counter++;}
-
-			
-		}
-	}
-
-	public function update_row($name,$id){
-
-	 $stmt = "UPDATE lga set name='$name' where id='$id'";
-	 $result = $this->connect()->query($stmt);
-	 if($result)
-	 {
-	 	echo "success";
-	 }
-	 else{
-	 	echo '<script>alert("Please Try Agin. Error Occured")</script>';
-	 }
-	 	
-	 exit();
-
-	}
-
-	public function lga()
-	{
-		$stmt = "SELECT * FROM lga";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			while ($rows = $result->fetch_assoc()) {
-				$datas[] = $rows;
-			}
-			return $datas;
-		}
-	}
-
-	public function lgaQuestion($id)
-	{
-		$stmt = "SELECT * FROM question_tb where lga_id = '$id' ";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				$data[] = $rows;
-			}
-			return $data;
-
-			
-		}
-		else
-			echo '<p class="text-danger text-center">No question add for this Local Government</p>';
-
-	}
-	public function allLga()
-	{
-		$stmt = "SELECT * FROM lga";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			echo '<select class="form-control" name="lgaID" required>';
-			echo '<option class="form-control"  value="">Select Local Government</option>';
-			while ($rows = $result->fetch_assoc()) {
-				echo '<option class="form-control"  value="'.$rows['id'].'">'.$rows['name'].'</option>';
-			}
-			echo '</select>';
-		}
-	}
-	public function storeQuestion($question,$option1,$option2,$option3,$option4,$correctAns,$lgaID)
-	{
-		$stmt = "INSERT into question_tb(question,option1,option2,option3,option4,correctAnswer,lga_id) Values('$question','$option1','$option2','$option3','$option4','$correctAns','$lgaID')";
-		$result = $this->connect()->query($stmt);
-		if ($result) {
-			echo "<script>alert('Question Add Successfully')</script>";
-		}
-		else
-			echo "<script>alert('Error Occured')</script>";
-	}
-
-	public function storeTest($testname,$start_date,$end_date,$mark,$release_result)
-	{
-		
-		if (empty($testname) || empty($start_date) || empty($end_date) || empty($release_result) || empty($mark)) 
-		{
-				$errorMessage = 'All field is requried';
-		}
-
-		else{
-			$currentYear = date('Y');
-			$newTestName = strtoupper($testname);
-			$checkstart = strtotime($start_date);
-			$checkend = strtotime($end_date);
-			if ($checkstart > $checkend) {
-				echo '<div class ="alert alert-danger"> <strong> Start Date can Not Be Greater than End Date 
-						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						</strong> </div>';
 			}
 			else{
-				$stmt = "SELECT * FROM test_tb where year = '$currentYear'";
-				$result = $this->connect()->query($stmt);
-				if ($result->num_rows > 0 ) {
-					echo '<div class ="alert alert-danger"> <strong> Test Has be created for this year 
-						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						</strong> </div>';
-				}
-				else{
-					$stmt = "INSERT INTO test_tb(testName,startDate,endDate,mark,releaseResult,year)values('$newTestName','$start_date','$end_date','$mark','$release_result','$currentYear')";
-					$result = $this->connect()->query($stmt);
-					if ($result) {
-						echo '<div class ="alert alert-success"> 
-							<strong> New Test Create Successfully
-							<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-							</strong> </div>';
-					}
-					else
-						echo '<div class ="alert alert-danger"> <strong> Sorry Error Ocurr 
-						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						</strong> </div>';
-				}
+				echo $this->checkapplicant($email);
 			}
-			
 		}
-	}
 
-	public function getStoreTest()
-	{
-		$stmt = "SELECT * FROM test_tb ";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				$data[] = $rows;
-			}
-			return $data;
-		}
-	}
-	public function checkStatus($id)
-	{
-		if ($id == 0) 
+		public function checkapplicant($email,$admissionNo)
 		{
-			return 'Yes';
+			$stmt = "SELECT * FROM application_tb where email = '$email' || admissionNo = '$admissionNo'";
+			$result = $this->connect()->query($stmt); 
+			if (($result->num_rows)> 0) {
+				return '<div class ="alert alert-danger"> <strong> Sorry !!! Admin Staff Already Exist 
+				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				</strong> </div>';
+				 
+			}
+			else{
+
+			}
 		}
-		else
-			return 'No';
-	}
-	
- 
-
-
-
 
 }
 // end of class

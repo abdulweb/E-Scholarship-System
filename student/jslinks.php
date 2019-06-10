@@ -30,7 +30,7 @@
 <script src="plugins/jquery-steps/jquery.steps.js"></script>
 
  <!-- Bootstrap Material Datetime Picker Plugin Js -->
-    <script src="plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script src="plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
 <!-- Sweet Alert Plugin Js -->
 <script src="plugins/sweetalert/sweetalert.min.js"></script>
@@ -41,8 +41,6 @@
 <script src="js/pages/forms/form-wizard.js"></script>
 
 <script src="js/pages/forms/basic-form-elements.js"></script>
-
-<script src="js/pages/forms/advanced-form-elements.js"></script>
 
 <script src="js/pages/index.js"></script>
 
