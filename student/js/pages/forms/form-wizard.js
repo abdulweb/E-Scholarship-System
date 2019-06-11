@@ -50,19 +50,28 @@ $(function () {
                 form.find('.body:eq(' + newIndex + ') label.error').remove();
                 form.find('.body:eq(' + newIndex + ') .error').removeClass('error');
             }
+            
 
             form.validate().settings.ignore = ':disabled,:hidden';
             return form.valid();
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
             setButtonWavesEffect(event);
+
+            if (currentIndex === 2) { //if last step
+                //remove default #finish button
+                $('#wizard_with_validation').find('a[href="#finish"]').remove();
+                //append a submit type button
+                $('#wizard_with_validation .actions li:last-child').append('<button type="submit" id="submit" class="btn-large"><span class="fa fa-chevron-right"></span></button>');
+            }
         },
         onFinishing: function (event, currentIndex) {
             form.validate().settings.ignore = ':disabled';
             return form.valid();
         },
         onFinished: function (event, currentIndex) {
-            swal("Good job!", "Submitted!", "success");
+            // swal("Good job!", "Submitted!", "success");
+            $("#wizard_with_validation").submit();
         }
     });
 

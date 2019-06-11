@@ -36,7 +36,8 @@ class user extends dbh
 				$rows= $result->fetch_assoc();
 				$userType = $rows['usertype'];
 				if($userType == 'staff')
-				// {	$get_image = "SELECT * FROM application_document where user_id = '$rows['user_id']'";
+				{	
+					// $get_image = "SELECT * FROM application_document where user_id = '$rows['user_id']'";
 				// 	$result = $this->connect()->query($get_image)->fetch_assoc();
 					$_SESSION['user'] = $username;
 					$_SESSION['usertype'] = $userType;
@@ -57,12 +58,6 @@ class user extends dbh
 					echo  $this->messages($error);	
 				}
 				
-			}
-			else{
-				$error = 1;
-				$oldmail = $username;
-				//return $oldmail;
-				echo  $this->messages($error);	
 			}
 			
 		}

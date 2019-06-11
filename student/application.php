@@ -1,6 +1,6 @@
 <?php include 'includes/dbh.php'; ?>
 <?php include 'includes/user.php'; 
-     include 'includes/function.php';
+     // include 'includes/function.php';
     $object->sessioncheck($_SESSION['user']);
  ?> 
 <?php
@@ -34,8 +34,39 @@
                                 </li>
                             </ul>
                         </div>
+                        <?php
+                            if (isset($_POST['submit_button'])) {
+                            // step one
+                            // echo "<script>alert('clicked')</script>";
+                            $firstname = $_POST['firstname'];
+                            $lastname = $_POST['lastname'];
+                            $middlename = $_POST['middlename'];
+                            $dob = $_POST['dob'];
+                            $phoneNo = $_POST['phoneNo'];
+                            $gender = $_POST['gender'];
+                            $maritalStatus = $_POST['maritalStatus'];
+                            $religion = $_POST['religion'];
+                            $lga_id = $_POST['lga_id'];
+                            $email = $_POST['email'];
+
+                            //step two Institution info
+                            $admissionNo = $_POST['admissionNo'];
+                            $institue = $_POST['institue'];
+                            $faculty = $_POST['faculty'];
+                            $department = $_POST['department'];
+                            $level = $_POST['level'];
+
+                            //step three Bank Info
+                            $bankName = $_POST['bankName'];
+                            $accountName = $_POST['accountName'];
+                            $accountType = $_POST['accountType'];
+                            $accountNo = $_POST['accountNo'];
+
+                            $object->applications($firstname,$lastname,$dob,$phoneNo,$bankName,$accountName,$accountType,$accountNo,$middlename,$email);
+                        }
+                        ?>
                         <div class="body">
-                            <form id="wizard_with_validation" method="POST" action="aa">
+                            <form id="wizard_with_validation" method="POST" action="application.php" enctype="multipart/form-data">
                                 <h3>Personal Information</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
@@ -68,6 +99,12 @@
                                             <label class="form-label">Phone Number <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
+                                     <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="email" class="form-control" name="email" required>
+                                            <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
                                     <div class="form-group form-float">
                                             <select class="form-control  show-tick" name="gender" required>
                                                 <option> Please Gender </option>
@@ -96,7 +133,7 @@
                                     
                                 </fieldset>
 
-                                <h3>Institution Information</h3>
+                                <!-- <h3>Institution Information</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -131,9 +168,9 @@
                                             <label class="form-label">Current Level <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
-                                </fieldset>
+                                </fieldset> -->
 
-                                <h3>Document</h3>
+                                <!-- <h3>Document</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
                                             <div><label class="form-label">Passport <span class="text-danger">*</span></label></div>
@@ -155,7 +192,7 @@
                                             </div>
                                     </div>
 
-                                </fieldset>
+                                </fieldset> -->
                                 <!-- Bank Details -->
                                 <h3>Bank</h3>
                                 <fieldset>
@@ -186,6 +223,7 @@
 
                                     <input id="acceptTerms-2" name="acceptTerms" type="checkbox" required>
                                     <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
+                                    <button class="btn btn-block btn-lg bg-green waves-effect" type="submit" name="submit_button">Submit</button>
                                 </fieldset>
 
                             </form>
