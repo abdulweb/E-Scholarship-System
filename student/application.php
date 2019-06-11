@@ -60,9 +60,9 @@
                             $bankName = $_POST['bankName'];
                             $accountName = $_POST['accountName'];
                             $accountType = $_POST['accountType'];
-                            $accountNo = $_POST['accountNo'];
+                            $accountNo = $_POST['accountNumber'];
 
-                            $object->applications($firstname,$lastname,$dob,$phoneNo,$bankName,$accountName,$accountType,$accountNo,$middlename,$email);
+                            $object->applications($firstname,$lastname,$dob,$phoneNo,$admissionNo,$institue,$faculty,$department,$level,$bankName,$accountName,$accountType,$accountNo,$middlename,$email);
                         }
                         ?>
                         <div class="body">
@@ -71,19 +71,19 @@
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="fname" required>
+                                            <input type="text" class="form-control" name="firstname" required>
                                             <label class="form-label">FirstName <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="lname" required>
+                                            <input type="text" class="form-control" name="lastname" required>
                                             <label class="form-label">LastName <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="mname">
+                                            <input type="text" class="form-control" name="middlename">
                                             <label class="form-label">MiddleName </label>
                                         </div>
                                     </div>
@@ -133,7 +133,7 @@
                                     
                                 </fieldset>
 
-                                <!-- <h3>Institution Information</h3>
+                                <h3>Institution Information</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
@@ -168,7 +168,7 @@
                                             <label class="form-label">Current Level <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
-                                </fieldset> -->
+                                </fieldset>
 
                                 <!-- <h3>Document</h3>
                                 <fieldset>
@@ -216,7 +216,7 @@
                                     </div>
                                     <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="acctountType" class="form-control" required>
+                                                <input type="text" name="accountType" class="form-control" required>
                                                 <label class="form-label"><span>*</span>Account Type</label>
                                             </div>
                                     </div>
