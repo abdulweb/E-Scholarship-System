@@ -19,7 +19,13 @@ class user extends dbh
 	public function applications($firstname,$lastname,$dob,$phoneNo,$admissionNo,$institue,$faculty,$department,$level,$bankName,$accountName,$accountType,$accountNo,$middlename,$email)
 	{
 		//return 'hey';
-		if (empty($this->checkapplicant($email)))
+		if  ($this->checkapplicant($email)> 0 ) 
+		{
+			echo '<script type="text/javascript">';
+			echo 'setTimeout(function () { swal("Alert!!"," User Already Exist!","error");';
+			echo '}, 1000);</script>';
+		}
+		else
 		{
 			if (empty($firstname)  || empty($accountNo)) 
 			{
@@ -34,15 +40,21 @@ class user extends dbh
               	// if ( (move_uploaded_file($_FILES["passport"]["tmp_name"], $target_file1)) && (move_uploaded_file($_FILES["indigineLetter"]["tmp_name"], $target_file2)) && (move_uploaded_file($_FILES["confirmationLetter"]["tmp_name"], $target_file3)))
               	// {
 
-              		$application_id = 'API'.substr(md5($firstname.$dob.$email),0);
-              		$stmt = "INSERT INTO application_tb(firstname,lastname,middlename,dob,institute,lga_id,phoneNo,admissionNo,gender,religion,maritalStatus,level,application_id,picture,indigne_letter,confirmation_letter,faculty,department,email) values('$firstname','$lastname','$middlename','$dob','$institue',' ','$phoneNo','$admissionNo',' ',' ',' ','$level','$application_id',' ',' ',' ','$faculty','$department','$email')";
+              		//$application_id = 'API'.substr(md5($firstname.$dob.$email),0);
+              		$stmt = "INSERT INTO application_tb(firstname,lastname,middlename,dob,institute,phoneNo,admissionNo,level,faculty,department,email) values('$firstname','$lastname','$middlename','$dob','$institue','$phoneNo','$admissionNo','$level','$faculty','$department','$email')";
+              		// $stmt = "INSERT INTO application_tb(firstname,lastname,middlename,dob,phoneNo,email) values('$firstname','$lastname','$middlename','$dob','$phoneNo','$email')";
               		if ($this->connect()->query($stmt)) 
               		{
-						$inserts = "INSERT INTO banks(bankName, accountName, accountType, accountNumber,application_id) Values('$bankName','$accountName','$accountType',$accountNo')";
+						$inserts = "INSERT INTO banks(bankName, accountName, accountType, accountNumber) Values('$bankName','$accountName','$accountType','$accountNo')";
 						$results = $this->connect()->query($inserts);
 						if ($results) {
 							echo '<script type="text/javascript">';
 							echo 'setTimeout(function () { swal("Success!!","Application Submitted Successfully !","success");';
+							echo '}, 1000);</script>';
+						}
+						else{
+							echo '<script type="text/javascript">';
+							echo 'setTimeout(function () { swal("error!!","Bank Record Not Upload !","error");';
 							echo '}, 1000);</script>';
 						}
 					}
@@ -61,10 +73,6 @@ class user extends dbh
               // }
 			}
 		}
-		else
-		{
-			echo $this->checkapplicant($email);
-		}
 		
 	}
 
@@ -72,14 +80,8 @@ class user extends dbh
 	{
 		$stmt = "SELECT * FROM application_tb where email = '$email'";
 		$result = $this->connect()->query($stmt); 
-		if (($result->num_rows)> 0) {
-			echo '<script type="text/javascript">';
-			echo 'setTimeout(function () { swal("Alert!!"," User Already Exist!","error");';
-			echo '}, 1000);</script>';
-		}
-		else{
-
-		}
+		$number_rows = $result->num_rows;
+		return $number_rows;
 	}
 
 	public function sessioncheck($sess)

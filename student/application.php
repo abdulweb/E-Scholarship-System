@@ -51,7 +51,7 @@
 
                             //step two Institution info
                             $admissionNo = $_POST['admissionNo'];
-                            $institue = $_POST['institue'];
+                            $institue = $_POST['institutionName'];
                             $faculty = $_POST['faculty'];
                             $department = $_POST['department'];
                             $level = $_POST['level'];
@@ -157,7 +157,7 @@
 
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="depertment" class="form-control" required>
+                                            <input type="text" name="department" class="form-control" required>
                                             <label class="form-label">Department <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
