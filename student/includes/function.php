@@ -29,7 +29,7 @@
 	}
 
 
-	$target_dir = "uploads/";
+						$target_dir = "uploads/";
 	                    $target_file1 = $target_dir . basename($_FILES["passport"]["name"]);
 	                    $target_file2 = $target_dir . basename($_FILES["indigineLetter"]["name"]);
 	                    $target_file3 = $target_dir . basename($_FILES["confirmationLetter"]["name"]);
@@ -51,70 +51,56 @@
 	                    // check passport
 	                    if ($_FILES["passport"]["size"] > 5000000) 
 		                  {
-		                      $msg = "Sorry, your file is too large. Must not be more than 5MB";
-		                      $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-		                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		                                <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-		                                </div>';
+		                       	echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, your Passport file is too large. Must not be more than 5MB","error");';
+								echo '}, 1000);</script>';
 		                      $uploadOk = 0;
 		                  }
 		                  // check indegineLetter
 		                  if ($_FILES["indigineLetter"]["size"] > 5000000) 
 	                      {
-	                          $msg = "Sorry, your file is too large. Must not be more than 5MB";
-	                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-	                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-	                                    </div>';
+	                           	echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, your indigine Letter file is too large. Must not be more than 5MB","error");';
+								echo '}, 1000);</script>';
 	                          $uploadOk = 0;
 	                      }
 	                       if ($_FILES["confirmationLetter"]["size"] > 5000000) 
 	                      {
-	                          $msg = "Sorry, your file is too large. Must not be more than 5MB";
-	                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-	                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-	                                    </div>';
+	                          	echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, your Confirmation Letter file is too large. Must not be more than 5MB","error");';
+								echo '}, 1000);</script>';
 	                          $uploadOk = 0;
 	                      }
 
 	                      // Allow certain file formats
 	                     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") 
 	                      {
-	                          $msg =  " Sorry, only JPG, JPEG, PNG  format is allowed for Passport.";
-	                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-	                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-	                                    </div>';
+	                           	echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, only JPG, JPEG, PNG  format is allowed for Passport.","error");';
+								echo '}, 1000);</script>';
 	                          $uploadOk = 0;
 	                      }
 	                      // Allow certain file formats for indigine letter
 	                      if($indigineLetterFileType != "jpg" && $indigineLetterFileType != "png" && $indigineLetterFileType != "jpeg") 
 	                      {
-	                          $msg =  " Sorry, only JPG, JPEG, PNG  format is allowed for indigine Letter.";
-	                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-	                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-	                                    </div>';
+	                           echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, only JPG, JPEG, PNG  format is allowed for indigine Letter.","error");';
+								echo '}, 1000);</script>';
 	                          $uploadOk = 0;
 	                      }
 
 	                      if($confirmationLetterFileType != "jpg" && $confirmationLetterFileType != "png" && $confirmationLetterFileType != "jpeg") 
 	                      {
-	                          $msg =  " Sorry, only JPG, JPEG, PNG  format is allowed for Confirmation Letter.";
-	                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-	                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-	                                    </div>';
+	                            echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, only JPG, JPEG, PNG  format is allowed for Confirmation Letter.","error");';
+								echo '}, 1000);</script>';
 	                          $uploadOk = 0;
 	                      }
 	                      if ($uploadOk == 0) 
 	                      {
-	                          $msg =  "Sorry, your file was not uploaded. Please retry";
-	                          $message =   '<div class="alert alert-icon alert-danger alert-dismissible fade in" role="alert"> 
-	                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                                    <i class="mdi mdi-block-helper"></i><strong>Attension!!</strong>'.$msg.' 
-	                                    </div>';
+	                            echo '<script type="text/javascript">';
+								echo 'setTimeout(function () { swal("Alert!!","Sorry, your file was not uploaded. Please retry.","error");';
+								echo '}, 1000);</script>';
 
 	                      // if everything is ok, try to upload file
 	                      }

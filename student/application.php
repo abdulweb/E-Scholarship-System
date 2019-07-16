@@ -62,7 +62,7 @@
                             $accountType = $_POST['accountType'];
                             $accountNo = $_POST['accountNumber'];
 
-                            $object->applications($firstname,$lastname,$dob,$phoneNo,$admissionNo,$institue,$faculty,$department,$level,$bankName,$accountName,$accountType,$accountNo,$middlename,$email);
+                            $object->applications($firstname,$lastname,$dob,$phoneNo,$admissionNo,$institue,$faculty,$department,$level,$bankName,$accountName,$accountType,$accountNo,$middlename);
                         }
                         ?>
                         <div class="body">
@@ -97,12 +97,6 @@
                                         <div class="form-line">
                                             <input type="number" class="form-control" name="phoneNo" required>
                                             <label class="form-label">Phone Number <span class="text-danger">*</span></label>
-                                        </div>
-                                    </div>
-                                     <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="email" class="form-control" name="email" required>
-                                            <label class="form-label">Email Address <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
@@ -170,7 +164,7 @@
                                     </div>
                                 </fieldset>
 
-                                <!-- <h3>Document</h3>
+                                <h3>Document</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
                                             <div><label class="form-label">Passport <span class="text-danger">*</span></label></div>
@@ -192,7 +186,7 @@
                                             </div>
                                     </div>
 
-                                </fieldset> -->
+                                </fieldset>
                                 <!-- Bank Details -->
                                 <h3>Bank</h3>
                                 <fieldset>

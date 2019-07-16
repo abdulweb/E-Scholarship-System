@@ -4,7 +4,17 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
+                <?php
+                    if (empty($object->getStudentPicture($_SESSION['user_id']))) 
+                    { ?>
+                         <img src="images/user.png" width="48" height="48" alt="User" />
+                   <?php  
+                   }
+                    else
+                    ?>
+                        <img src="<?=$object->getStudentPicture($_SESSION['user_id'])?>" width="48" height="48" alt="User" />
+                <?php ?>
+                   
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
@@ -39,7 +49,7 @@
                     <li>
                         <a href="application.php">
                             <i class="material-icons">layers</i>
-                            <span>Application</span>
+                            <span>Account</span>
                         </a>
                     </li>
                     <li>

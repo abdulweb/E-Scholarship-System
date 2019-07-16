@@ -183,7 +183,7 @@ class user extends dbh
                     <td>'.$rows['date_create'].'</td>
                     <td>
                     <a href="" class="btn btn-info btn-sm">View</a>
-                    <a href="delete.php?id='.htmlentities($rows['id']).'" class="btn btn-danger btn-sm" onclick="return confirm(\'sure to delete !\');" >Delete</a>
+                    <a href="delete.php?id='.htmlentities($rows['user_id']).'" class="btn btn-danger btn-sm" onclick="return confirm(\'sure to delete !\');" >Delete</a>
                     </td>
                 </tr>';
                 

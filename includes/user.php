@@ -48,6 +48,7 @@ class user extends dbh
 				{
 					$_SESSION['user'] = $username;
 					$_SESSION['usertype'] = $userType;
+					$_SESSION['user_id'] = $rows['user_id'];
 					$error = 0;
 					header('location:student/index.php');
 				}
