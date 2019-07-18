@@ -60,8 +60,13 @@ class user extends dbh
 				}
 				
 			}
+			else{
+				$error = 2;
+				echo $this->messages($error);
+			}
 			
 		}
+
 		
 	}
 

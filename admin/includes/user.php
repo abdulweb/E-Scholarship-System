@@ -156,7 +156,7 @@ class user extends dbh
 	}
 
 	public function checkAdminStaff($email){
-		$stmt = "SELECT * FROM user_tb where email = '$email'";
+		$stmt = "SELECT * FROM user_tb where email = '$email' and usertype = 'staff'";
 		$result = $this->connect()->query($stmt); 
 		if (($result->num_rows)> 0) {
 			return '<div class ="alert alert-danger"> <strong> Sorry !!! Admin Staff Already Exist 
