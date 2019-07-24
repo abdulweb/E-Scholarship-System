@@ -7,15 +7,18 @@
     include 'headlink.php'; 
     include 'topbar.php';
     include 'sidebar.php';
+    $get = $_GET['id'];
+    $userDetail = $object->getUser($get);
 ?>
 
-<body class="theme-teal">
+<body class="theme-red">
     
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
                 <ol class="breadcrumb breadcrumb-col-teal">
-                    <li><a href="javascript:void(0);"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="index.php;"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="application.php"><i class="material-icons">layers</i> Account</a></li>
                     <li class="active"><i class="material-icons">archive</i> Application</li>
                 </ol>
             </div>
@@ -47,7 +50,7 @@
                             $maritalStatus = $_POST['maritalStatus'];
                             $religion = $_POST['religion'];
                             $lga_id = $_POST['lga_id'];
-                            $email = $_POST['email'];
+                            $application_id = $_POST['applicationID'];
 
                             //step two Institution info
                             $admissionNo = $_POST['admissionNo'];
@@ -62,51 +65,41 @@
                             $accountType = $_POST['accountType'];
                             $accountNo = $_POST['accountNumber'];
 
-                            $object->applications($firstname,$lastname,$dob,$phoneNo,$admissionNo,$institue,$faculty,$department,$level,$bankName,$accountName,$accountType,$accountNo,$middlename);
+                            $object->update($firstname,$lastname,$dob,$phoneNo,$gender,$religion,$maritalStatus,$admissionNo,$institue,$faculty,$department,$level,$bankName,$accountName,$accountType,$accountNo,$middlename,$application_id);
                         }
-                        $check = $object->checkAccount($_SESSION['user_id']);
-                        
-                        if ($check == 1) {
-                            $UserDetails = $object->getUser($_SESSION['user_id']);
-                            
-                                include('profile.php');
-                             // }                    
-                        }                       
-                        else
-                        {
-
                         ?>
+                        
                         <div class="body">
-                            <form id="wizard_with_validation" method="POST" action="application.php" enctype="multipart/form-data">
+                            <form id="wizard_with_validation" method="POST" action="edit.php">
                                 <h3>Personal Information</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="firstname" required>
+                                            <input type="text" class="form-control" name="firstname" value="<?=$userDetail['firstname']?>" required>
                                             <label class="form-label">FirstName <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="lastname" required>
+                                            <input type="text" class="form-control" name="lastname" value="<?=$userDetail['lastname']?>" required>
                                             <label class="form-label">LastName <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="middlename">
+                                            <input type="text" class="form-control" name="middlename" value="<?=$userDetail['middlename']?>">
                                             <label class="form-label">MiddleName </label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="date" class="form-control" name="dob" required>
+                                            <input type="date" class="form-control" name="dob" value="<?=$userDetail['dob']?>" required>
                                             <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" class="form-control" name="phoneNo" required>
+                                            <input type="number" class="form-control" name="phoneNo" value="<?=$userDetail['phoneNo']?>" required>
                                             <label class="form-label">Phone Number <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
@@ -142,98 +135,75 @@
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="admissionNo" class="form-control" required>
+                                            <input type="text" name="admissionNo" class="form-control" value="<?=$userDetail['admissionNo']?>" required>
                                             <label class="form-label">Admission Number <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                      <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="institutionName" class="form-control" required>
+                                            <input type="text" name="institutionName" class="form-control" value="<?=$userDetail['firstname']?>" required>
                                             <label class="form-label">Institution Name<span class="text-danger">*</span></label>
                                         </div>
                                     </div>
 
                                      <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="faculty" class="form-control" required>
+                                            <input type="text" name="faculty" class="form-control" value="<?=$userDetail['faculty']?>"required>
                                             <label class="form-label">Faculty <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
 
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="department" class="form-control" required>
+                                            <input type="text" name="department" class="form-control" value="<?=$userDetail['department']?>" required>
                                             <label class="form-label">Department <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
 
                                      <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="number" name="level" class="form-control" required>
+                                            <input type="number" name="level" class="form-control" value="<?=$userDetail['level']?>" required>
                                             <label class="form-label">Current Level <span class="text-danger">*</span></label>
                                         </div>
                                     </div>
                                 </fieldset>
 
-                                <h3>Document</h3>
-                                <fieldset>
-                                    <div class="form-group form-float">
-                                            <div><label class="form-label">Passport <span class="text-danger">*</span></label></div>
-                                            <div class="form-line">
-                                                <input type="file" name="passport" class="form-control" required>
-                                                
-                                            </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                            <div><label class="form-label">Indigne Letter <span class="text-danger">*</span></label></div>
-                                            <div class="form-line">
-                                                <input type="file" name="indigineLetter" class="form-control" required>
-                                            </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                            <div><label class="form-label">Confirmation Letter <span class="text-danger">*</span></label></div>
-                                            <div class="form-line">
-                                                <input type="file" name="confirmationLetter" class="form-control" required>
-                                            </div>
-                                    </div>
-
-                                </fieldset>
                                 <!-- Bank Details -->
                                 <h3>Bank</h3>
                                 <fieldset>
                                     <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="bankName" class="form-control" required>
+                                                <input type="text" name="bankName" class="form-control" value="<?=$userDetail['bankName']?>" required>
                                                 <label class="form-label"><span>*</span>Bank Name</label>
                                             </div>
                                     </div>
                                     <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="accountName" class="form-control" required>
+                                                <input type="text" name="accountName" class="form-control" value="<?=$userDetail['accountName']?>" required>
                                                 <label class="form-label"><span>*</span>Account Name</label>
                                             </div>
                                     </div>
                                     <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="number" name="accountNumber" class="form-control" required>
+                                                <input type="number" name="accountNumber" value="<?=$userDetail['accountNumber']?>" class="form-control" required>
                                                 <label class="form-label"><span>*</span>Account Number</label>
                                             </div>
                                     </div>
                                     <div class="form-group form-float">
                                             <div class="form-line">
-                                                <input type="text" name="accountType" class="form-control" required>
+                                                <input type="text" name="accountType" value="<?=$userDetail['accountType']?>" class="form-control" required>
                                                 <label class="form-label"><span>*</span>Account Type</label>
                                             </div>
                                     </div>
 
                                     <input id="acceptTerms-2" name="acceptTerms" type="checkbox" required>
                                     <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
+                                    <input class="btn" name="applicationID" type="hidden" value="<?=$userDetail['application_id']?>">
                                     <button class="btn btn-block btn-lg bg-green waves-effect" type="submit" name="submit_button">Submit</button>
                                 </fieldset>
 
                             </form>
                         </div>
-                        <?php }?>
                     </div>
                 </div>
             </div>

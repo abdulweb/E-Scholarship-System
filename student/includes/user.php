@@ -171,6 +171,53 @@ class user extends dbh
 		return $rows['picture'];
 	}
 
+	public function checkAccount($user_id){
+
+		$result =  $this->connect()->query("SELECT * from application_tb where user_id = '$user_id'");
+		if ($result) {
+			$num_rows = $result->num_rows;
+			 if($num_rows > 0){
+			 	return 1;
+			 }
+			 else{
+			 	return 0;
+			 }
+		}
+		else
+			return 0;
+		
+	}
+	public function getUser($user_id){
+		$stmt = "SELECT * FROM application_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt); 
+		$number_rows = $result->num_rows;
+		$data = $result->fetch_assoc();
+		return $data;
+	}
+
+	public function update($firstname,$lastname,$dob,$phoneNo,$gender,$religion,$maritalStatus,$admissionNo,$institue,$faculty,$department,$level,$bankName,					$accountName,$accountType,$accountNo,$middlename,$id)
+	{
+			$stmt = "UPDATE application_tb set firstname = '$firstname', lastname = '$lastname', middlename = '$middlename', dob = '$dob',  
+			phoneNo = '$phoneNo',  admissionNo = '$admissionNo', 
+			institute = '$institue', faculty = '$faculty', department = '$department', level = '$level', bankName = '$bankName', 
+			accountName = '$accountName', accountType = '$accountType', accountNumber = '$accountNo'  where application_id = '$id'";
+
+			// $stmt = "UPDATE application_tb SET firstname = '$firstname', lastname = '$lastname', middlename = '$middlename', dob = '$dob', phoneNo = '$phoneNo', gender = '$gender', religion = '$religion', maritalStatus = '$maritalStatus', admissionNo = '$admissionNo', institute = '$institue', faculty = '$faculty', department = '$department', level = '$level', bankName = '$bankName', accountName = '$accountName', accountType = '$accountType', accountNumber = '$accountNo' WHERE user_id = '$id'";
+			if ($this->connect()->query($stmt)) 
+          		{
+						echo '<script type="text/javascript">';
+						echo 'setTimeout(function () { swal("Success!!","Profile Updated Successfully !","success");';
+						echo '}, 1000);</script>';
+				}
+				else
+				{
+					echo '<script type="text/javascript">';
+						echo 'setTimeout(function () { swal("Alert!!","Error occured Please try again !","error");';
+						echo '}, 1000);</script>';
+				}
+
+	}
+
 }
 // end of class
 $object = new user();

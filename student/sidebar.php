@@ -53,9 +53,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);">
+                        <a href="apply.php">
                             <i class="material-icons">widgets</i>
-                            <span>Screening Test</span>
+                            <span> Scholarship Application </span>
                         </a>
                     </li>
                 </ul>
