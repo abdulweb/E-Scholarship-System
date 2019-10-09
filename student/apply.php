@@ -30,15 +30,15 @@
         		<div class="row">
                     <div class="col-md-12 ">
                     <h3 class="text-center">Application Notice</h3>
-                    <p>Please Take Note of the following before applying for <span class="font-bold"><?=date('Y')?></span> Scholarship</p>
+                    <p class="text-danger m-l-10">Please Take Note of the following before applying for <span class="font-bold text-success"><?=date('Y')?></span> Scholarship.</p>
                     <ol>
-                        <li>Make Sure You have Submitted ur Bio-data</li>
+                        <li>Make Sure You have Submitted ur Bio-data Before applying to avoid lost </li>
                         <li>If your document is find fake your application will be rejected</li>
                         <li>You will have to take simple Test for Verification</li>
                         <li>Fail to take the test simple mean you did not apply for this year scholarship</li>
                         <li>If you have agreed on the above the click on Apply button to start the test</li>
                     </ol>
-                    <button class="btn btn-success btn-block">Apply Now</button>
+                    <a class="btn btn-success btn-block" onclick ="return confirm('Read to take Test?');" href="test.php">Apply Now</a>
 
                 </div>      
                 </div>

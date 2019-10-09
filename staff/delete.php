@@ -4,5 +4,6 @@
    ?>
 <?php
 	$getid = $_GET['id'];
+	echo '<script>alert("hello word")</script>';
 	$object->delete($getid);
 ?>

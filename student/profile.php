@@ -18,6 +18,7 @@
 	    <p><span class="font-bold">Gender: </span> |<?=$UserDetails['gender']?></p>
 	    <p><span class="font-bold">Religion: </span> |<?=$UserDetails['religion']?></p>
 	    <p><span class="font-bold">Marital Status: </span> |<?=$UserDetails['maritalStatus']?></p>
+	    <p><span class="font-bold">Local Government: </span> |<?=$object->getLgaName($UserDetails['lga_id'])?></p>
 	</div>
 </div>
 <div class="row" >

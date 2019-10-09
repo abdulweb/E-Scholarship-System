@@ -135,6 +135,10 @@
                                              <option value="Other">Other</option>
                                         </select>
                                     </div>
+                                    <section>
+                                        <label class="label">Local Government</label>
+                                            <?php $object->allLga()?>
+                                    </section>
                                     
                                 </fieldset>
 

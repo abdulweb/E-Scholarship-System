@@ -218,6 +218,122 @@ class user extends dbh
 
 	}
 
+	public function checkBioData($user_id)
+	{
+		$stmt = "SELECT * FROM application_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		return $result->num_rows;
+	}
+
+	public function getTestQuestion($user_id)
+	{
+		// $result = $this->connect()->query("SELECT lga_id FROM application_tb where user_id = '$user_id'")->fetch_assoc();
+		// print_r($result);
+
+		$stmt = "SELECT lga_id FROM application_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$lga_value = $rows['lga_id'];
+
+		$select = $this->connect()->query("SELECT * FROM question_tb where lga_id = '$lga_value'");
+		$numberrows = $select->num_rows;
+		if ($numberrows > 0) {
+			$counter = 1;
+			while ($rows= $select->fetch_assoc()) {
+				$data[] = $rows;
+			}
+			// return $data;
+			$arr = $arr_history = $data;
+
+			$new_data = [];
+
+			for ( $i = 0; $i < 3; $i++ )
+			{
+				// If the history array is empty, re-populate it.
+				  if (empty($arr_history) )
+				    $arr_history = $arr;
+
+				  // Randomize the array.
+				  array_rand($arr_history);
+
+				  // Select the last value from the array.
+				  $selected = array_pop($arr_history);
+
+				  array_push($new_data, $selected);
+
+				  //$new_data[] = $selected;
+			}
+			return $new_data;
+
+			
+		}
+		else{
+			return 'No question yet Please check back Later';
+		}
+		
+	}
+
+	public function getLgaName($lga_id)
+	{
+		$stmt = "SELECT * FROM lga where lga_id = '$lga_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		return $rows['name'];
+	}
+
+	public function allLga()
+	{
+		$stmt = "SELECT * FROM lga";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			echo '<select class="form-control" name="lgaID" required>';
+			echo '<option class="form-control"  value="">Select Local Government</option>';
+			while ($rows = $result->fetch_assoc()) {
+				echo '<option class="form-control"  value="'.$rows['lga_id'].'">'.$rows['name'].'</option>';
+			}
+			echo '</select>';
+		}
+	}
+
+	public function lgaQuestion($id)
+	{
+		$stmt = "SELECT * FROM question_tb where lga_id = '$id' ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			$counter = 1;
+			while ($rows= $result->fetch_assoc()) {
+				$data[] = $rows;
+			}
+			return $data;
+
+			
+		}
+
+	}
+
+	// public function breakTest(){
+	// 	$question_answered = [];
+	// 	array_push($question_answered, var)
+	// }
+
+	public function storeTest($question_answered)
+	{
+		$questionID = $question_answered[1];
+		$ddate = date('Y-m-d');
+		$correctAnswer = $question_answered[5];
+		$stmt = "INSERT INTO application_test(question_id,selected_answer,test_id,ddate) values('$questionID','$correctAnswer','2','$ddate')";
+		$result = $this->connect()->query($stmt);
+		if ($result) {
+			return 'Test submitted';
+		}
+		else
+		{
+			return 'error occure';
+		}
+	}
+
 }
 // end of class
 $object = new user();

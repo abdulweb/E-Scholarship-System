@@ -33,11 +33,12 @@
 						<li>
 							<a href="#">
 								<i class="fa fa-menu-arrow pull-right"></i>
-								<i class="main-icon fa fa-bar-chart-o"></i> <span>Student</span>
+								<i class="main-icon fa fa-bar-chart-o"></i> <span>Applicant</span>
 							</a>
 							<ul><!-- submenus -->
-								<li><a href="">Shortlisted</a></li>
-								<li><a href="">Unshortlisted</a></li>
+								<li><a href="">All Applicant</a></li>
+								<li><a href="">Shortlisted Applicant</a></li>
+								<li><a href="">Unshortlisted Applicant</a></li>
 							</ul>
 						</li>
 

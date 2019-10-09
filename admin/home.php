@@ -57,12 +57,12 @@
 
 								<div class="col-md-4">
 									<h4>No of Question</h4>
-									<input class="knob"  value="44">
+									<input class="knob"  value="<?=$object->getQuestion();?>">
 								</div>
 
 								<div class="col-md-4">
 									<h4>No of Local Government</h4>
-									<input class="knob"  value="44">
+									<input class="knob"  value="<?=$object->getLocal();?>">
 								</div>
 
 							</div>

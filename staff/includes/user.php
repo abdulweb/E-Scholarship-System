@@ -195,7 +195,7 @@ class user extends dbh
 	}
 
 	public function delete($id){
-		$stmt = "DELETE FROM lga WHERE id = '$id'";
+		$stmt = "DELETE FROM lga WHERE lga_id = '$id'";
 		$result = $this->connect()->query($stmt);
 		if (!$result) {
 			$_SESSION['message'] = '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
@@ -266,7 +266,7 @@ class user extends dbh
                     <td>
                     <a href="#" onclick ="edit_row('.$rows['id'].')" id="edit_btn'.$rows['id'].'"> <i class="fa fa-pencil"></i></a>
                     <a href="" id="save_btn'.$rows['id'].'" class="save_btn" onclick ="save_row('.$rows['id'].')"> <i class="fa fa-save"></i></a>
-                    <a href="delete.php?id='.htmlentities($rows['id']).'" onclick="return confirm(\'sure to delete !\');" ><i class="fa fa-trash"></i></a>
+                    <a href="delete.php?id='.htmlentities($rows['lga_id']).'" onclick="return confirm(\'sure to delete !\');" ><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>';
                 
@@ -332,7 +332,7 @@ class user extends dbh
 			echo '<select class="form-control" name="lgaID" required>';
 			echo '<option class="form-control"  value="">Select Local Government</option>';
 			while ($rows = $result->fetch_assoc()) {
-				echo '<option class="form-control"  value="'.$rows['id'].'">'.$rows['name'].'</option>';
+				echo '<option class="form-control"  value="'.$rows['lga_id'].'">'.$rows['name'].'</option>';
 			}
 			echo '</select>';
 		}

@@ -57,6 +57,9 @@
 										$object->insertLga($lgaName);
 										echo $_SESSION['message'];
 									}
+									if (!empty($_SESSION['message'])) {
+										echo $_SESSION['message'];
+									}
 								?>
 							</div>
 							<div class="col-md-9">
@@ -150,7 +153,7 @@
 	
 		<!-- JAVASCRIPT FILES -->
 		
-		<?php include('..\admin/includes/js.php'); ?>
+		<?php include('..\admin/includes/js.php'); unset($_SESSION['message']) ?>
 		<script type="text/javascript">
 			loadScript(plugin_path + "datatables/js/jquery.dataTables.min.js", function(){
 				loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function(){

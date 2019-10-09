@@ -82,7 +82,7 @@
 														<th>Correct Answer</th>
 														<th></th>
 													</tr>
-													<?php $questions = $object->lgaQuestion($result['id']);
+													<?php $questions = $object->lgaQuestion($result['lga_id']);
 															$counter=1;
 															foreach ($questions as $question) {?>
 														<tr>
@@ -94,7 +94,7 @@
 										                    <td><?=$question['option4']?></td>
 										                    <td><?=$question['correctAnswer']?></td>
 										                    <td>
-										                   
+										                   		<a href=""><i class="fa fa-trash" tooltip="Delete"></i></a>
 										                    </td>
 										                </tr>
 											<?php

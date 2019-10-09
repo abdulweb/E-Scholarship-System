@@ -128,7 +128,10 @@
                                              <option value="Other">Other</option>
                                         </select>
                                     </div>
-                                    
+                                    <div class="form-group form-float">
+                                        <label class="label">Local Government</label>
+                                            <?php $object->allLga()?>
+                                    </div>
                                 </fieldset>
 
                                 <h3>Institution Information</h3>
