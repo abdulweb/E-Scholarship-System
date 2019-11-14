@@ -5,6 +5,7 @@
 	unset($_SESSION['user']);
 	include('includes/headlink.php');
 	error_reporting(0);
+	echo md5('olamide');
  ?>
 	<!--
 		.boxed = boxed version

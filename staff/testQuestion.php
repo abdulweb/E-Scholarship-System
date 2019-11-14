@@ -173,8 +173,13 @@
 													<section>
 														<label class="label">Correct Answer</label>
 														<label class="input">
-															<i class="icon-append fa fa-book"></i>
-															<input type="text" name="correctAns" class="form-control" required="">
+															<select name="correctAns" class="form-control" required="">
+																<option value=""></option>
+																<option value="A">A</option>
+																<option value="B">B</option>
+																<option value="C">C</option>
+																<option value="D">D</option>
+															</select>
 															<span class="tooltip tooltip-top-right">Correct Answer</span>
 														</label>
 													</section>

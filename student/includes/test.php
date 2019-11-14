@@ -31,8 +31,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="card-body">
-                <div class="row">
+        	<div class="card-body">
+        		<div class="row">
                     <div class="col-md-12 ">
 
                     <h3 class="text-center text-success">Zamfara <?=date('Y');?> Aptitude Test</h3>
@@ -40,30 +40,37 @@
                     <?php
                     $checkTestNo = $object->checkTest($_SESSION['user_id']);
                     if ($checkTestNo > 0) {
-                    echo '<h3 class="text-center text-success"> Your test has been submitted Successfuly </h3>';
-                    echo '<h5 class="text-center text-success">Keep checking your Dashboard to know your status</h5>' ;
-                        echo '<p class="text-center text-danger"> Contact your Local Gov'."'".'t Admin for any help </p>';
+                    echo '<h3 class="text-center text-success"> Your test has been submitted Successfuly</h3> 
+                            <p class="text-center text-danger"> Contact your Local Gov'."'".'t Admin for any help </p>';
                     }
                     else{
-                            
-                        if ((isset($_POST['Submit_btn'])) ||($_SERVER['REQUEST_METHOD']=='POST')) {
-                             $Selected_Answers = array();
-                            $Question_IDs = array();
-                            for ($i=0; $i < 3 ; $i++) 
-                            { 
-                                # code...
-                                $btn = 'op'.$i;
-                                $qstn = $i;
-                                if ($_POST[$btn]=="Not Selected") {
-                                    # code...
 
-                                }else{
-                                array_push($Selected_Answers, $_POST[$btn]);
-                                array_push($Question_IDs, $_POST[$qstn]);
-                            }
+                    
+                        if (isset($_POST['Submit_btn'])) {
+                            $option1 = $_POST['0'];
+                            $option2 = $_POST['1'];
+                            $option3 = $_POST['2'];
+                            $option4 = $_POST['3'];
+                            // print_r($option1);
+                            //  print_r($option2);
+                            //   print_r($option3);
+                               // print_r($option1);
+                            // $array [] = $option1;
+                            // echo ($option1);
+                        print_r($option1);
+                        // echo count($option1);
+                        for($i = 0; $i < count($option1); $i++)
+                        {
+                                print_r($option1[$i]);
                         }
-                            $object->storeTest($Question_IDs,$Selected_Answers,$_SESSION['user_id']);
-                            
+
+                                //  echo $option1;
+                                // echo  $option2;
+                            // ($object->storeTest($option1, $_SESSION['user_id']));
+                            // ($object->storeTest($option2, $_SESSION['user_id']));
+                            // ($object->storeTest($option3, $_SESSION['user_id']));
+                            // ($object->storeTest($option4, $_SESSION['user_id']));
+                            // ($object->storeTest($option5, $_SESSION['user_id']));
                         }
                     ?>
 
@@ -73,21 +80,18 @@
                             $counter = 1;
                             foreach ($questions as $key => $question) {
                                 $questionID = $question['question_id'];
-                                $qstn_id = $key;
-                                $button_name = 'op'.$key;
                         ?>
                             <p class="ml-5 font-bold"> <span style="margin: 10px;"><?=$counter;?> </span> <?=$question['question'];?></p>
                             <div class="demo-radio-button">
 
-                                    <input type="hidden" name="<?=$qstn_id?>" value = "<?=$questionID?>">
-                                    <input type="hidden" name="<?=$button_name?>" value = "Not Selected">
-                                    <input name="<?=$button_name?>" type="radio" id="<?=$key?>a" class="with-gap" value="A" />
+                            
+                                    <input name="<?=$key?>" type="radio" id="<?=$key?>a" class="with-gap" value="<?=array("1", "F")?>" />
                                     <label for="<?=$key?>a"><?=$question['option1'];?></label>
-                                    <input name="<?=$button_name?>" type="radio" id="<?=$key?>b" class="with-gap" value="B" />
+                                    <input name="<?=$key?>" type="radio" id="<?=$key?>b" class="with-gap" value="<?=array($questionID, B)?>" />
                                     <label for="<?=$key?>b"><?=$question['option2'];?></label>
-                                    <input name="<?=$button_name?>" type="radio" class="with-gap" id="<?=$key?>c" value="C"/>
+                                    <input name="<?=$key?>" type="radio" class="with-gap" id="<?=$key?>c" value="<?=array($questionID, C)?>"/>
                                     <label for="<?=$key?>c"><?=$question['option3'];?></label>
-                                    <input name="<?=$button_name?>" type="radio" id="<?=$key?>d" class="with-gap" value="D"/>
+                                    <input name="<?=$key?>" type="radio" id="<?=$key?>d" class="with-gap" value="<?=array($questionID, D)?>"/>
                                     <label for="<?=$key?>d"><?=$question['option4'];?></label>
                             </div>
                             <?php
@@ -101,7 +105,7 @@
                     </div>
                     <?php }?>
                 </div>
-            </div>
+        	</div>
         </div>
         
 

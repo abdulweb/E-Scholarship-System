@@ -313,25 +313,47 @@ class user extends dbh
 
 	}
 
-	// public function breakTest(){
-	// 	$question_answered = [];
-	// 	array_push($question_answered, var)
-	// }
+	
 
-	public function storeTest($question_answered)
+	public function storeTest($Question_IDs,$Selected_Answers,$user_id)
 	{
-		$questionID = $question_answered[1];
-		$ddate = date('Y-m-d');
-		$correctAnswer = $question_answered[5];
-		$stmt = "INSERT INTO application_test(question_id,selected_answer,test_id,ddate) values('$questionID','$correctAnswer','2','$ddate')";
+		$ddate = date('Y');
+		for ($i=0; $i < 3; $i++) { 
+			$questionID = $Question_IDs[$i];
+			$correctAnswer = $Selected_Answers[$i];
+
+			$stmt = "INSERT INTO applicant_test(question_id,selected_answer,test_id,ddate,user_id) values('$questionID','$correctAnswer','2','$ddate','$user_id')";
+			$result = $this->connect()->query($stmt);
+			if (!$result) {
+				$res =  "Error occured";
+			}
+			else
+			{
+				$res =  'success';
+			}
+		}
+		return $res;
+		
+
+	}
+
+	public function checkTest($user_id)
+	{
+		$stmt = "SELECT * FROM applicant_test where user_id = '$user_id'";
 		$result = $this->connect()->query($stmt);
-		if ($result) {
-			return 'Test submitted';
-		}
-		else
-		{
-			return 'error occure';
-		}
+		$numberrows = $result->num_rows;
+		return $numberrows;
+
+	}
+
+	public function applicantStatus($user_id)
+	{
+		$currentYear = date('Y');
+		$stmt = "SELECT * FROM shortlist where user_id = '$user_id' and ddate = $currentYear";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$status = $rows['status'];
+		return $status;
 	}
 
 }

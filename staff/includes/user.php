@@ -417,7 +417,204 @@ class user extends dbh
 	}
 	
  
+	public function getApplicantResult()
+	{
+		$ddate = date('Y');
+		$stmt = "SELECT * FROM applicant_test where ddate = '$ddate' ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) 
+		{
+				$counter = 1;
+				while ($rows= $result->fetch_assoc()) {
+					$data[] = $rows;
+				}
+				return $data;
+		}
+	}
+	public function getApplicantAll()
+	{
+		$ddate = date('Y');
+		$stmt = "SELECT DISTINCT ddate, user_id from applicant_test ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) 
+		{
+				$counter = 1;
+				while ($rows= $result->fetch_assoc()) {
+					$data[] = $rows;
+				}
+				return $data;
+		}
+	}
 
+	public function userEmail($user_id)
+	{
+		$stmt = "SELECT * FROM application_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$user_id = $rows['user_id'];
+		$stmt = "SELECT * FROM user_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		return $rows['email'];
+	}
+
+	public function getLgaName($user_id)
+	{
+		$stmt = "SELECT * FROM application_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$lga_id = $rows['lga_id'];
+		$stmt = "SELECT * FROM lga where lga_id = '$lga_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		return $rows['name'];
+	}
+	public function calculateTest($questioID)
+	{
+		$stmt = "SELECT * FROM question_tb where question_id = '$questioID'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$correctAnswers = $rows['correctAnswer'];
+		return $correctAnswers;
+
+
+	}
+	public function eachApplicantResult($user_id)
+	{
+		$ddate = date('Y');
+		$sum = 0;
+		$stmt = "SELECT * FROM applicant_test where ddate = '$ddate' and user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) 
+		{
+				$counter = 1;
+				while ($rows= $result->fetch_assoc()) {
+					if ($this->calculateTest($rows['question_id']) == $rows['selected_answer']) {
+						$sum = $sum + 1;
+					}
+					$data[] = $rows;
+				}
+				return ($sum / 0.1);
+		}
+	}
+
+	public function getApplicant($user_id)
+	{
+		$stmt = "SELECT * FROM application_tb where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$firstname = $rows['firstname'];
+		$lastname = $rows['lastname'];
+		$middlename = $rows['middlename'];
+		$name = $firstname . " " . $middlename . " ". "lastname";
+		return $name;
+	}
+
+	public function applicantStatus($user_id)
+	{
+		$currentYear = date('Y');
+		$stmt = "SELECT * FROM shortlist where user_id = '$user_id' and ddate = $currentYear";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc();
+		$status = $rows['status'];
+		return $status;
+	}
+
+	public function applicantDetails($user_id)
+	{
+		$ddate = date('Y');
+		$stmt = "SELECT * from application_tb where user_id = '$user_id' ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) 
+		{
+				$counter = 1;
+				while ($rows= $result->fetch_assoc()) {
+					$data[] = $rows;
+				}
+				return $data;
+		}
+	}
+
+	public function shortAplicant($user_id,$status)
+	{
+		if (empty($this->checkShortlist($user_id))) {
+			$currentYear = date('Y');
+			$stmt = "INSERT into shortlist(user_id,status,ddate) Values('$user_id','$status','$currentYear')";
+			$result = $this->connect()->query($stmt);
+				if ($result) {
+					echo '<div class="alert alert-success">shortlisted Successfully</div>';
+				}
+				else{
+					echo '<div class="alert alert-danger">shortlisted UnSuccessfully</div>';
+				}
+			}
+
+		else
+		{
+			echo $this->checkShortlist($user_id);
+		}
+	}
+
+	public function rejectApplicant($user_id, $status)
+	{
+		$stmt = "UPDATE shortlist set status = '$status' where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		if ($result) 
+		{
+			echo '<div class="alert alert-success">Applicant Rejected Successfully</div>';
+		}
+		else{
+			echo '<div class="alert alert-danger">Error Try again/div>';
+			}
+	}
+		
+
+	public function checkShortlist($user_id){
+		$stmt = "SELECT * FROM shortlist where user_id = '$user_id'";
+		$result = $this->connect()->query($stmt);
+		$rows = $result->fetch_assoc(); 
+		if (($result->num_rows)> 0) {
+			return '<div class ="alert alert-danger"> <strong> Applicant has Already shortlisted 
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			</strong> </div>';
+			 
+		}
+	}
+
+	public function unshortlisted()
+	{
+		$stmt = "SELECT * from application_tb ";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) 
+		{
+			$counter = 1;
+			while ($rows= $result->fetch_assoc()) {
+
+				$id = $rows['user_id'];
+				$stmtx = "SELECT DISTINCT user_id from applicant_test where user_id = '$id' ";
+				$results = $this->connect()->query($stmtx);
+				$numberrow = $results->num_rows;
+				if ($numberrow > 0) {
+					
+				}
+				else{
+					$data[] = $rows['user_id'];
+				}
+
+				// $data[] = $rows;
+			}
+
+			return $data;
+		
+
+
+	}
+}
 
 
 

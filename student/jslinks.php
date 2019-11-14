@@ -47,6 +47,10 @@
 <!-- Demo Js -->
 <script src="js/demo.js"></script>
 
+<script src="assets/js/jquery-2.1.3.min.js"></script>
+
+<script type="text/javascript" src="assest/js/jquery.countdown.pack.js"></script>
+
 </body>
 
 </html>

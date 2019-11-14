@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-md-4">
 	    <?php $pic = $object->getStudentPicture($_SESSION['user_id'])?>
-	    <img src="uploads/images (6).jpg" alt="user Image" width="280" height="246" class="img img-circle">
+	    <img src="<?=$UserDetails['picture']?>" alt="user Image" width="250" height="246" class="img img-circle" style ="margin-left: 17px;">
 	</div>
 	<div class="col-md-8">
 	    <h3><?= $UserDetails['firstname']. " ". $UserDetails['lastname'] . " ".$UserDetails['middlename']  ?></h3>

@@ -36,9 +36,9 @@
 								<i class="main-icon fa fa-bar-chart-o"></i> <span>Applicant</span>
 							</a>
 							<ul><!-- submenus -->
-								<li><a href="">All Applicant</a></li>
-								<li><a href="">Shortlisted Applicant</a></li>
-								<li><a href="">Unshortlisted Applicant</a></li>
+								<li><a href="all_applicant.php">All Applicant</a></li>
+								<li><a href="shortlisted.php">Shortlisted Applicant</a></li>
+								<li><a href="unshortlist.php">Unshortlisted Applicant</a></li>
 							</ul>
 						</li>
 
@@ -65,8 +65,9 @@
 								<i class="main-icon fa fa-user"></i> <span>Applicant</span>
 							</a>
 							<ul><!-- submenus -->
-								<li><a href="">Shortlisted</a></li>
-								<li><a href="">Unshortlisted</a></li>
+								<li><a href="all_applicant.php">All Applicant</a></li>
+								<li><a href="shortlisted.php">Shortlisted</a></li>
+								<li><a href="unshortlist.php">Unshortlisted</a></li>
 							</ul>
 						</li>
 

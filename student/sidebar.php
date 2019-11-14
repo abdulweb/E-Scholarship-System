@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="pages/typography.html">
+                        <a href="status.php">
                             <i class="material-icons">text_fields</i>
                             <span>Scholarship Status</span>
                         </a>
